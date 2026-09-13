@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ryan Sukma Nesya — Product Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* text stays neutral-dark for readability; the GREY surfaces go cool blue-gray
+       (sampled from the reference palette) — base background stays pure white */
+    --ink:#1a1d24;
+    --body:#484d59;
+    --mid:#8b909d;
+    --faint:#c2c9d6;
+    --line:#e4e8f0;      /* cool light border */
+    --bg:#ffffff;         /* base stays white */
+    --chrome:#f7f9fc;     /* very light cool tint for header/footer — barely off white */
+    --panel:#eef1f7;      /* cool blue-gray surface (cards hover, placeholders) */
+    --panel-deep:#e2e7f0; /* slightly deeper cool tone for hover pills */
+    --accent:#3d5afe;
+    --radius:16px;
+    /* fallback project accent (used if no theme class is set) */
+    --proj:#1f9d57;
+    --proj-2:#0e8d6f;
+    --proj-soft:#e7f6ee;
+  }
+  /* per-project signifier palette — one distinct hue each, applied on #detailView.
+     --proj: solid accent (tabs, links, keywords) · --proj-2: gradient endpoint for the hero
+     · --proj-soft: light tint. Curated (not brand-based: 3 of 5 projects are Amartha). */
+  /* Amartha brand purple (sampled from Amartha's own gradient palette) — shared by every
+     Amartha project so the company reads consistently, project to project. */
+  .theme-celengan, .theme-grassroots, .theme-fieldofficer{ --proj:#8b2fc9; --proj-2:#4a1868; --proj-soft:#f3e8fb; }
+  .theme-buyer       { --proj:#d9822b; --proj-2:#cf5f1f; --proj-soft:#fbefe1; } /* amber  (Tokopedia) */
+  .theme-mentoring   { --proj:#6d4bd8; --proj-2:#5a34c4; --proj-soft:#efeafb; } /* violet (Dibimbing) */
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .hidden{ display:none !important; }
+  p{ margin:0; color:var(--body); font-size:15px; line-height:1.7; }
+  a{ color:inherit; }
+  .wrap{ max-width:900px; margin:0 auto; padding:0 32px; }
+  img.ph, .ph{
+    background:var(--panel); display:flex; align-items:center; justify-content:center; color:var(--faint);
+    border:1px solid var(--line);
+  }
+  .ph svg{ width:22px; height:22px; opacity:.5; }
+
+  /* ---------- NAV ---------- */
+  /* chrome (header/sub-nav/footer) gets a faint grey tint vs. the pure-white content
+     background — reads as "frame" vs. "page", a common hierarchy cue */
+  nav.top{ position:sticky; top:0; z-index:20; background:rgba(247,249,252,.82); backdrop-filter:blur(6px); border-bottom:1px solid var(--line); }
+  nav.top .wrap{ display:flex; justify-content:space-between; align-items:center; padding:14px 24px; }
+  /* wordmark — Bebas Neue: tall condensed display caps, one weight; clean + characterful */
+  nav.top .logo{ font-family:"Bebas Neue", -apple-system, sans-serif; font-weight:400; font-size:24px; letter-spacing:.10em; line-height:1; color:var(--ink); }
+  nav.top .links{ display:flex; gap:8px; font-size:14px; }
+
+  /* text button: no underline, gets a darker background pill on hover */
+  .text-btn{ display:inline-flex; align-items:center; gap:9px; padding:8px 14px; border-radius:999px; font-size:14px; color:var(--body); text-decoration:none; background:transparent; transition:background .15s,color .15s; cursor:pointer; }
+  .text-btn:hover{ background:var(--panel-deep); color:var(--ink); }
+  .text-btn svg{ width:16px; height:16px; flex-shrink:0; }
+  .text-btn svg:not(.filled){ stroke:var(--ink); }
+  .text-btn svg.filled{ fill:var(--ink); stroke:none; }
+
+  /* ---------- HOMEPAGE HERO ---------- */
+  .hero{ display:flex; gap:44px; align-items:flex-start; padding:72px 0 0; }
+  .hero img.photo{ width:112px; height:112px; border-radius:50%; object-fit:cover; flex-shrink:0; }
+  .hero h1{ font-size:26px; margin:0 0 4px; letter-spacing:-.01em; }
+  .hero .role{ font-size:15px; color:var(--ink); font-weight:600; margin-bottom:18px; }
+  .hero .bio{ margin-bottom:26px; }
+  .hero .actions{ display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; }
+  .hero .actions .secondary-group{ display:flex; gap:8px; flex-wrap:wrap; }
+
+  /* custom dashed line (native border-dash gap isn't controllable) — 4px dash, 12px gap */
+  .dashed-divider{ border:0; height:1px; margin:32px 0; background-image:repeating-linear-gradient(to right, var(--faint) 0 4px, transparent 4px 16px); }
+  /* primary: solid black, hover → grey */
+  .btn{ display:inline-flex; align-items:center; gap:8px; padding:11px 22px; border:1px solid var(--ink); font-size:14px; text-decoration:none; border-radius:999px; transition:background .15s,border-color .15s; background:var(--ink); color:#fff; }
+  /* subtle darken, not a full color jump — stays recognizably "the same black button" */
+  .btn:hover{ background:#2e2e2e; border-color:#2e2e2e; }
+  /* secondary: white with black border. Hover fills faintly grey — never inverts to black,
+     so it never reads as a second primary button. */
+  .btn-secondary{ display:inline-flex; align-items:center; gap:8px; padding:11px 22px; border:1px solid var(--ink); font-size:14px; text-decoration:none; color:var(--ink); background:#fff; border-radius:999px; transition:background .15s; }
+  .btn-secondary:hover{ background:var(--panel); }
+  /* compact pill for Call/Mail/LinkedIn — same visual family as btn-secondary, smaller */
+  .btn-pill{ display:inline-flex; align-items:center; gap:7px; padding:9px 16px; border:1px solid var(--line); font-size:13.5px; text-decoration:none; color:var(--ink); background:#fff; border-radius:999px; transition:background .15s,border-color .15s; }
+  .btn-pill:hover{ background:var(--panel); border-color:var(--faint); }
+  .btn-pill svg{ width:15px; height:15px; }
+  .btn-pill svg.filled{ fill:var(--ink); stroke:none; }
+
+  .section-label{ font-size:12px; color:var(--mid); text-transform:uppercase; letter-spacing:.08em; margin:0 0 22px; }
+
+  .work{ padding-bottom:72px; }
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  /* Notion-style card: image + text all inside one bordered container.
+     On hover only the text body changes color (image stays put). */
+  .proj-card{ text-decoration:none; color:inherit; display:block; cursor:pointer; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:var(--bg); transition:transform .18s, box-shadow .18s; }
+  .proj-card:hover{ transform:translateY(-3px); box-shadow:0 10px 28px rgba(30,40,80,.08); }
+  .proj-card .thumb{ width:100%; aspect-ratio:16/10; display:block; border:0; border-radius:0; object-fit:cover; }
+  .proj-card .card-body{ padding:18px 20px 22px; background:var(--bg); transition:background .18s; }
+  .proj-card:hover .card-body{ background:var(--chrome); }
+  /* min-height reserves space for 2 lines so 1-line titles don't make cards jump shorter
+     than their neighbors in the grid */
+  .proj-card h3{ font-size:16px; font-weight:600; margin:0 0 10px; letter-spacing:-.005em; line-height:1.35; min-height:calc(1.35em * 2); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .proj-card .company-row{ display:flex; align-items:center; gap:6px; font-size:13px; color:var(--ink); font-weight:500; margin-bottom:6px; }
+  .proj-card .company-row img{ width:18px; height:18px; object-fit:contain; flex-shrink:0; }
+  .proj-card .meta-line{ font-size:13px; color:var(--ink); }
+  /* projects whose case study isn't written yet: visible but not clickable */
+  .proj-card.is-soon{ cursor:default; position:relative; }
+  .proj-card.is-soon::after{ content:"Soon"; position:absolute; top:12px; left:12px; background:var(--ink); color:#fff; font-size:11px; padding:4px 10px; border-radius:999px; z-index:1; }
+  .proj-card.is-soon .thumb{ filter:grayscale(1) opacity(.55); }
+  .proj-card.is-soon:hover{ transform:none; box-shadow:none; }
+  .proj-card.is-soon:hover .card-body{ background:var(--bg); }
+
+  .contact-row{ display:flex; gap:6px; flex-wrap:wrap; }
+
+  /* ---------- DETAIL PAGE ---------- */
+  .detail-nav{ display:flex; justify-content:space-between; align-items:center; padding:14px 24px; }
+  .detail-nav .back{ font-size:14px; }
+  .detail-nav .back svg{ width:14px; height:14px; }
+
+  .sub-nav{ position:sticky; top:0; z-index:15; background:rgba(247,249,252,.82); backdrop-filter:blur(6px); border-bottom:1px solid var(--line); }
+  .sub-nav .wrap{ display:flex; gap:26px; padding:12px 32px; overflow-x:auto; }
+  .sub-nav a{ font-size:13px; color:var(--mid); text-decoration:none; white-space:nowrap; padding-bottom:3px; border-bottom:2px solid transparent; }
+  .sub-nav a:hover{ color:var(--ink); }
+  .sub-nav a.active{ color:var(--proj); font-weight:600; border-bottom-color:var(--proj); }
+
+  /* soft tint fading to white — colored at the top, dissolving into the page so there's
+     no hard band edge. reads as "the green project" without a heavy block. dark type;
+     meta icons carry the accent at full strength. */
+  .proj-hero{ background:linear-gradient(180deg, var(--proj-soft) 0%, var(--bg) 100%); padding:52px 0 28px; scroll-margin-top:110px; }
+  .proj-hero .d-title{ color:var(--ink); margin:0 0 24px; }
+  .proj-hero .d-meta-row .cell svg{ stroke:var(--ink); }
+  .proj-hero .d-meta-row .cell b{ color:var(--mid); }
+  .proj-hero .d-meta-row .cell span{ color:var(--ink); }
+
+  .d-section{ padding:52px 0; border-bottom:1px solid var(--line); scroll-margin-top:110px; }
+  .d-section:last-of-type{ border-bottom:none; }
+  .d-title{ font-size:28px; margin:0 0 28px; letter-spacing:-.015em; line-height:1.25; }
+  /* meta list, Notion-style: icon + label + value on one line, stacked vertically —
+     scans top-to-bottom in a single left-to-right sweep per row, instead of jumping
+     between stacked label/value pairs across side-by-side columns */
+  .d-meta-row{ display:flex; flex-direction:column; gap:14px; }
+  .d-meta-row .cell{ display:flex; align-items:center; gap:12px; font-size:15px; }
+  .d-meta-row .cell svg{ width:18px; height:18px; stroke:var(--mid); flex-shrink:0; }
+  /* small company logo inline, just left of the company name */
+  .d-meta-row .cell .meta-logo{ width:17px; height:17px; object-fit:contain; vertical-align:-4px; margin-right:7px; }
+  .d-meta-row .cell b{ font-weight:400; color:var(--mid); min-width:78px; }
+  .d-meta-row .cell span{ color:var(--ink); font-weight:600; }
+  /* project banner — same cover as the homepage card, sits below the meta */
+  .proj-banner{ width:100%; height:auto; display:block; border-radius:var(--radius); margin:0 0 4px; }
+
+  /* section heading + italic caption sit tight together (2–4px) */
+  .section-h2.tight{ margin-bottom:4px; }
+  .section-sub{ font-size:14px; font-style:italic; color:var(--mid); margin:0 0 4px; }
+
+  /* H3 sub-heading inside a flow group — one level below the flow name */
+  .flow-h3{ font-size:17px; font-weight:700; color:var(--ink); letter-spacing:-.01em; margin:0 0 8px; }
+
+  /* opportunity table under each flow: rationale / opportunity / impact */
+  .opp-table{ width:100%; border-collapse:collapse; font-size:13.5px; margin-bottom:32px; }
+  .opp-table th{ text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--mid); padding:10px 14px; border-bottom:1.5px solid var(--ink); font-weight:600; }
+  .opp-table td{ padding:16px 14px; border-bottom:1px solid var(--line); vertical-align:top; color:var(--body); }
+  .opp-table td.empty{ color:var(--faint); }
+  .opp-table th, .opp-table td{ width:33.33%; }
+
+  /* prototype placed under a flow, centered so it reads as "try it here" */
+  .flow-proto{ margin-top:8px; display:flex; align-items:center; gap:40px; }
+  .flow-proto .flow-proto-note{ flex:1; min-width:200px; }
+  .flow-proto .flow-proto-note .flow-h3{ margin-bottom:12px; }
+  .flow-proto .flow-proto-note p{ margin:0; color:var(--body); font-size:14.5px; line-height:1.6; }
+  .flow-proto .flow-proto-note .hint{ display:flex; align-items:center; gap:8px; margin-top:16px; font-size:13.5px; font-weight:600; color:var(--proj); }
+  .flow-proto .flow-proto-note .hint svg{ flex-shrink:0; }
+
+  /* each metric is its own bordered card — reads as 3 distinct stats, not one fused block */
+  .metrics-box{ display:flex; gap:16px; flex-wrap:wrap; margin-top:32px; }
+  .metric{ flex:1; min-width:160px; padding:20px 22px; border:1px solid var(--line); border-radius:var(--radius); background:var(--bg); }
+  .metric .m-icon{ width:32px; height:32px; border-radius:50%; background:var(--panel); display:flex; align-items:center; justify-content:center; margin-bottom:14px; }
+  .metric .m-icon svg{ width:16px; height:16px; stroke:var(--ink); }
+  .metric .num{ font-size:21px; font-weight:600; letter-spacing:-.01em; line-height:1.2; margin-bottom:4px; }
+  .metric .lbl{ font-size:13px; color:var(--ink); }
+
+  .gallery-hero{ width:100%; aspect-ratio:16/9; border-radius:var(--radius); margin-bottom:18px; position:relative; overflow:hidden; }
+  .gallery-sub-label{ font-size:12px; color:var(--mid); text-transform:uppercase; letter-spacing:.06em; margin:22px 0 12px; }
+  .gallery-sub{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .gallery-sub .ph{ aspect-ratio:4/3; border-radius:var(--radius); }
+
+  /* phone mockup: brushed-metal frame gradient + glass highlight sweep across the screen,
+     so it reads as an actual device photo/render rather than a flat placeholder box */
+  .proto-phone{ width:260px; max-width:100%; flex-shrink:0; background:linear-gradient(155deg,#3a3f47 0%,#15171b 22%,#0c0d10 78%,#2b2e34 100%); border-radius:34px; padding:15px 13px 13px; box-shadow:0 20px 44px rgba(20,25,45,.24), inset 0 0 0 1px rgba(255,255,255,.06); position:relative; }
+  .proto-phone::before{ content:""; position:absolute; top:6px; left:50%; transform:translateX(-50%); width:7px; height:7px; border-radius:50%; background:#3a3f47; box-shadow:inset 0 0 0 1px rgba(255,255,255,.08); z-index:2; }
+  .proto-phone .screen{ width:100%; aspect-ratio:360/800; border-radius:20px; overflow:hidden; background:var(--bg); position:relative; box-shadow:inset 0 0 0 1px rgba(255,255,255,.05); }
+  .proto-phone .screen::after{ content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(115deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,.05) 14%, transparent 26%, transparent 100%); }
+  /* Figma renders the prototype at its real 360x800 frame size regardless of iframe box —
+     so instead of stretching it into a smaller iframe (which just crops the UI), render it
+     at native size then scale the whole thing down visually to fit the mockup screen. */
+  .proto-phone .screen iframe{ width:360px; height:800px; border:0; display:block; transform:scale(0.65); transform-origin:top left; }
+  .proto-phone .screen.ph{ display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px; color:var(--faint); border:0; }
+
+  .ds-badge{ display:flex; align-items:center; gap:14px; margin-top:24px; padding:16px; border:1px solid var(--line); border-radius:var(--radius); background:var(--panel); }
+  .ds-badge .thumb{ width:56px; height:42px; flex-shrink:0; border-radius:var(--radius); }
+  .ds-badge b{ display:block; font-size:13px; margin-bottom:2px; }
+  .ds-badge span{ font-size:12.5px; color:var(--mid); }
+
+  /* highlighted "what is this product" callout */
+  /* intro-split: prototype standalone (left, no container — free to be bigger) +
+     "Apa itu Celengan?" panel (right). Row is center-aligned so both sit on the same axis. */
+  .intro-split{ display:flex; align-items:center; justify-content:center; gap:48px; flex-wrap:wrap; }
+  .intro-split .proto-phone{ box-shadow:0 14px 34px rgba(20,25,45,.18); }
+  /* soft project tint reinforces the accent near the top of the page */
+  .intro-copy{ flex:1; min-width:280px; max-width:420px; background:var(--proj-soft); border:1px solid transparent; border-radius:var(--radius); padding:32px 34px; }
+  .intro-copy .hc-label{ font-size:20px; font-weight:700; color:var(--ink); margin-bottom:14px; letter-spacing:-.01em; }
+  .intro-copy ul{ margin:0; padding-left:18px; }
+  .intro-copy li{ font-size:15px; line-height:1.7; color:var(--body); }
+  .intro-copy li + li{ margin-top:8px; }
+
+  /* label under an empty image placeholder, telling what image goes there */
+  .ph-label{ font-size:11.5px; color:var(--mid); text-align:center; margin-top:7px; }
+  .below-img .ph-label{ text-align:left; }
+  /* WIP marker for sections whose content is not written yet */
+  .wip-note{ font-size:13px; color:var(--mid); font-style:italic; padding:6px 0; }
+  .bullet-list{ margin:0; padding-left:20px; max-width:680px; }
+  /* Summary should fill the full container width, not the narrow reading measure */
+  #summary .bullet-list{ max-width:none; }
+  .bullet-list li{ font-size:15px; line-height:1.75; color:var(--body); }
+  .bullet-list li + li{ margin-top:10px; }
+
+  /* standarized: image (if any) sits full-width BELOW the paragraph, not beside it —
+     keeps detail-heavy screenshots legible and behaves the same at every breakpoint */
+  .subsection{ margin-bottom:40px; }
+  .subsection:last-child{ margin-bottom:0; }
+  /* sentence-title: subheading inside a subsection, clearly larger/bolder than 15px body.
+     section-h2: one level up (section label, e.g. "User research"), sized bigger than sentence-title
+     so the hierarchy between the two reads clearly. */
+  .subsection .sentence-title{ font-size:20px; font-weight:700; color:var(--ink); margin:0 0 12px; line-height:1.35; letter-spacing:-.01em; }
+  .section-h2{ font-size:24px; font-weight:700; color:var(--ink); margin:0 0 18px; line-height:1.3; letter-spacing:-.01em; }
+  .subsection .below-img{ margin-top:18px; }
+  .subsection .below-img .ph{ aspect-ratio:16/9; border-radius:var(--radius); }
+  /* real images render at their own aspect ratio, no forced crop */
+  .below-img img{ width:100%; height:auto; border-radius:var(--radius); display:block; }
+  .subsection .caption{ font-size:12px; color:var(--mid); margin-top:8px; }
+
+  /* invest/divest keywords in the bridging paragraph pick up the project accent */
+  #solution > p b{ color:var(--proj); }
+  .flow-group{ margin-bottom:44px; }
+  .flow-group:last-of-type{ margin-bottom:0; }
+  .flow-group .flow-name{ font-size:20px; font-weight:700; color:var(--ink); letter-spacing:-.01em; margin-bottom:12px; }
+  .flow-context{ margin-bottom:18px; }
+  /* small bold sub-label that separates prose from the numbered steps */
+  .flow-sublabel{ font-size:13px; font-weight:600; color:var(--ink); margin-bottom:8px; }
+  .flow-steps-list{ margin:0 0 18px; padding-left:20px; font-size:15px; color:var(--body); line-height:1.8; }
+  .flow-strip{ display:flex; gap:14px; }
+  .flow-step{ flex:1; text-align:center; }
+  .flow-step .ph{ aspect-ratio:9/16; margin-bottom:8px; border-radius:var(--radius); }
+  .flow-step span{ font-size:12px; color:var(--mid); }
+  .prototype-btn{ display:inline-flex; align-items:center; gap:8px; margin-top:22px; padding:12px 22px; border:1px solid var(--ink); font-size:14px; text-decoration:none; color:var(--ink); background:#fff; border-radius:999px; transition:background .15s; }
+  .prototype-btn:hover{ background:var(--panel); }
+
+  /* UT findings: each = an insight paragraph + a "Tested design" vs "Improved design" compare.
+     When a finding passed with no redesign, the right column is a green Passed badge, not a screen. */
+  .ut-intro{ margin-bottom:28px; }
+  /* segmented pill tabs — descriptive labels so the strip itself signals there were 3 findings */
+  .ut-tablist{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:28px; }
+  .ut-tab{ font:inherit; cursor:pointer; padding:9px 16px; border:1px solid var(--line); background:var(--bg); border-radius:999px; font-size:13.5px; color:var(--body); transition:background .15s,border-color .15s,color .15s; }
+  .ut-tab:hover{ background:var(--panel); }
+  .ut-tab.active{ background:var(--proj); border-color:var(--proj); color:#fff; }
+  .ut-finding{ margin-bottom:0; }
+  .ut-insight{ margin-bottom:20px; }
+  /* the whole comparison sits in one grey rounded panel; the two screens are white cards
+     inside it, with their labels centered on top */
+  .ut-compare{ display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:start; background:var(--panel); border:1px solid var(--line); border-radius:20px; padding:24px; }
+  .ut-col{ display:flex; flex-direction:column; align-items:center; }
+  .ut-col .col-label{ font-size:14px; font-weight:600; color:var(--ink); margin-bottom:16px; }
+  /* white screen card. The screenshot renders at its own aspect ratio (no forced crop) —
+     only the empty placeholder state falls back to a phone-shaped box. */
+  .ut-shot{ width:100%; max-width:250px; background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(20,25,45,.06); display:flex; align-items:center; justify-content:center; color:var(--faint); position:relative; overflow:hidden; }
+  .ut-shot:not(:has(img)){ aspect-ratio:360/760; }
+  .ut-shot svg{ width:26px; height:26px; opacity:.4; }
+  .ut-shot img{ width:100%; height:auto; display:block; }
+  /* passed result: green overlay + check on the white card */
+  .ut-shot-passed .ut-overlay{ position:absolute; inset:0; background:rgba(26,127,75,.10); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; font-size:14px; font-weight:700; color:#127046; }
+  .ut-overlay .ut-check{ width:46px; height:46px; border-radius:50%; background:#1a7f4b; display:flex; align-items:center; justify-content:center; }
+  .ut-overlay .ut-check svg{ width:24px; height:24px; stroke:#fff; opacity:1; }
+
+  .summary-stack > div{ margin-bottom:30px; max-width:none; }
+  .summary-stack > div:last-child{ margin-bottom:0; }
+  .summary-stack h4{ font-size:20px; font-weight:700; color:var(--ink); letter-spacing:-.01em; margin:0 0 10px; }
+
+  /* other-projects: full-bleed band, darker ground than the white content above */
+  .other-projects{ background:var(--panel); border-top:1px solid var(--line); padding:56px 0; }
+  .other-projects .section-h2{ margin-bottom:22px; }
+
+  /* full-width bar, same height rhythm as nav.top — footer reads as a matching bookend, not an afterthought */
+  footer.site-footer{ background:var(--chrome); border-top:1px solid var(--line); }
+  footer.site-footer .wrap{ display:flex; justify-content:space-between; align-items:center; gap:16px; padding:14px 24px; font-size:13px; color:var(--mid); }
+  /* hover pill sits a touch darker than the panel background */
+  footer.site-footer .text-btn:hover{ background:var(--panel-deep); }
+
+  @media(max-width:680px){
+    .hero{ flex-direction:column; gap:22px; padding-top:48px; }
+    .grid2, .gallery-sub, .ut-compare{ grid-template-columns:1fr; }
+    .d-meta-row{ gap:24px; }
+    .metrics{ gap:26px; }
+    nav.top .links{ gap:16px; }
+    .flow-strip{ flex-wrap:wrap; }
+    .flow-step{ flex:1 1 40%; }
+  }
+</style>
+</head>
+<body>
+
+<template id="icon-image">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+    <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>
+  </svg>
+</template>
+<template id="icon-back">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width:14px;height:14px;">
+    <path d="M15 18l-6-6 6-6"/>
+  </svg>
+</template>
+<template id="icon-role">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+    <circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6"/>
+  </svg>
+</template>
+<template id="icon-calendar">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+    <rect x="3.5" y="5" width="17" height="16" rx="2"/><path d="M3.5 9.5h17"/><path d="M8 3v4M16 3v4"/>
+  </svg>
+</template>
+<template id="icon-company">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+    <rect x="3" y="8" width="18" height="12" rx="2"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>
+  </svg>
+</template>
+<template id="icon-transaction">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+    <path d="M4 8h13l-3-3M20 16H7l3 3"/>
+  </svg>
+</template>
+<template id="icon-money">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+    <rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 9v6M18 9v6"/>
+  </svg>
+</template>
+<template id="icon-userplus">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+    <circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.6 6-5.6s6 2.3 6 5.6"/><path d="M18 8v6M15 11h6"/>
+  </svg>
+</template>
+<template id="icon-check">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+    <path d="M5 12.5l4.5 4.5L19 7"/>
+  </svg>
+</template>
+<template id="icon-mail">
+  <svg class="filled" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm330.5-288.5Q496-450 501-453l283-177q8-5 12-12.5t4-16.5q0-20-17-30t-35 1L480-520 212-688q-18-11-35-.5T160-659q0 10 4 17.5t12 11.5l283 177q5 3 10.5 4.5T480-447q5 0 10.5-1.5Z"/></svg>
+</template>
+<template id="icon-phone">
+  <svg class="filled" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg"><path d="M798-120q-125 0-247-54.5T329-329Q229-429 174.5-551T120-798q0-18 12-30t30-12h162q14 0 25 9.5t13 22.5l26 140q2 16-1 27t-11 19l-97 98q20 37 47.5 71.5T387-386q31 31 65 57.5t72 48.5l94-94q9-9 23.5-13.5T670-390l138 28q14 4 23 14.5t9 23.5v162q0 18-12 30t-30 12Z"/></svg>
+</template>
+<template id="icon-linkedin">
+  <svg class="filled" viewBox="0 0 382 382" xmlns="http://www.w3.org/2000/svg"><path d="M347.445,0H34.555C15.471,0,0,15.471,0,34.555v312.889C0,366.529,15.471,382,34.555,382h312.889 C366.529,382,382,366.529,382,347.444V34.555C382,15.471,366.529,0,347.445,0z M118.207,329.844c0,5.554-4.502,10.056-10.056,10.056 H65.345c-5.554,0-10.056-4.502-10.056-10.056V150.403c0-5.554,4.502-10.056,10.056-10.056h42.806 c5.554,0,10.056,4.502,10.056,10.056V329.844z M86.748,123.432c-22.459,0-40.666-18.207-40.666-40.666S64.289,42.1,86.748,42.1 s40.666,18.207,40.666,40.666S109.208,123.432,86.748,123.432z M341.91,330.654c0,5.106-4.14,9.246-9.246,9.246H286.73 c-5.106,0-9.246-4.14-9.246-9.246v-84.168c0-12.556,3.683-55.021-32.813-55.021c-28.309,0-34.051,29.066-35.204,42.11v97.079 c0,5.106-4.139,9.246-9.246,9.246h-44.426c-5.106,0-9.246-4.14-9.246-9.246V149.593c0-5.106,4.14-9.246,9.246-9.246h44.426 c5.106,0,9.246,4.14,9.246,9.246v15.655c10.497-15.753,26.097-27.912,59.312-27.912c73.552,0,73.131,68.716,73.131,106.472 L341.91,330.654L341.91,330.654z"/></svg>
+</template>
+
+<!-- ================= HOMEPAGE ================= -->
+<div id="homeView">
+  <nav class="top">
+    <div class="wrap">
+      <div class="logo">RYAN'S PORTFOLIO</div>
+      <div class="links">
+        <a class="text-btn" href="https://drive.google.com/file/d/1Dbd8kuxwYP4hOyMQIHqH203O1jXya023/view?usp=drive_link" target="_blank" rel="noopener">Resume</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <div class="hero">
+      <img class="photo" src="assets/profile-picture/profile-picture.webp" alt="Ryan Sukma Nesya">
+      <div>
+        <h1>Ryan Sukma Nesya</h1>
+        <div class="role">Product Designer · 7+ YoE across fintech, e-commerce, and SaaS</div>
+        <p class="bio">I build products where user trust and business goals both win, turning ambiguous problems into clear design rationale stakeholders can act on. I also mentor emerging designers through several design education programs.</p>
+        <div class="actions">
+          <a class="btn" href="https://drive.google.com/file/d/1Dbd8kuxwYP4hOyMQIHqH203O1jXya023/view?usp=drive_link" target="_blank" rel="noopener">View resume</a>
+          <div class="secondary-group">
+            <a class="btn-pill" href="tel:+6281277885367"><span data-icon="phone"></span>Call</a>
+            <a class="btn-pill" href="mailto:ryanesya5@gmail.com"><span data-icon="mail"></span>Mail</a>
+            <a class="btn-pill" href="https://www.linkedin.com/in/ryanesya/" target="_blank" rel="noopener"><span data-icon="linkedin"></span>LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dashed-divider">
+
+    <div class="work">
+      <div class="section-label">Selected work</div>
+      <div class="grid2">
+        <a class="proj-card" onclick="openDetail('detailView-ggs'); return false" href="#">
+          <img class="thumb" src="projects/grassroots/images/grassroots_cover.png" alt="Grassroots Growth Series cover">
+          <div class="card-body">
+            <h3>Grassroots Growth Series: Impact Investing for Urban Lenders</h3>
+            <div class="company-row"><img src="assets/company-logos/logo-amartha.png" alt="">Amartha</div>
+            <div class="meta-line">2026</div>
+          </div>
+        </a>
+        <a class="proj-card" onclick="openDetail(); return false" href="#">
+          <img class="thumb" src="projects/celengan/images/celengan_cover.png" alt="Celengan cover">
+          <div class="card-body">
+            <h3>Celengan: Investment for Rural Women Entrepreneurs</h3>
+            <div class="company-row"><img src="assets/company-logos/logo-amartha.png" alt="">Amartha</div>
+            <div class="meta-line">2024</div>
+          </div>
+        </a>
+        <a class="proj-card is-soon" onclick="return false" href="#">
+          <img class="thumb" src="projects/mentoring/images/mentoring_cover.png" alt="Mentoring Potential Talent to Achieve Their UX Dream Jobs cover">
+          <div class="card-body">
+            <h3>Mentoring Potential Talent to Achieve Their UX Dream Jobs</h3>
+            <div class="company-row"><img src="assets/company-logos/logo-dibimbing.png" alt="">Dibimbing.id</div>
+            <div class="meta-line">2021 – 2025</div>
+          </div>
+        </a>
+        <a class="proj-card is-soon" onclick="return false" href="#">
+          <img class="thumb" src="projects/buyer-discovery/images/homepage-content.webp" alt="Improving Buyer's Discovery and Learning Experience cover">
+          <div class="card-body">
+            <h3>Improving Buyer's Discovery and Learning Experience</h3>
+            <div class="company-row"><img src="assets/company-logos/logo-tokopedia.png" alt="">Tokopedia</div>
+            <div class="meta-line">2022</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Contact info lives here now, not as a separate section above — having both was
+       redundant (two blocks saying the same thing back to back). -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 Ryan Sukma Nesya</span>
+      <div class="contact-row">
+        <a class="text-btn" href="tel:+6281277885367"><span data-icon="phone"></span>Call</a>
+        <a class="text-btn" href="mailto:ryanesya5@gmail.com"><span data-icon="mail"></span>Mail</a>
+        <a class="text-btn" href="https://www.linkedin.com/in/ryanesya/" target="_blank" rel="noopener"><span data-icon="linkedin"></span>LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ================= PROJECT DETAIL ================= -->
+<div id="detailView" class="hidden theme-celengan detail-view">
+  <nav class="top">
+    <div class="wrap detail-nav">
+      <a class="text-btn back" onclick="openHome(); return false" href="#"><span data-icon="back"></span> Back to work</a>
+    </div>
+  </nav>
+
+  <div class="sub-nav">
+    <div class="wrap">
+      <a href="#overview">Overview</a>
+      <a href="#problem">Problem</a>
+      <a href="#solution">Solution</a>
+      <a href="#testing">Testing</a>
+      <a href="#summary">Summary</a>
+    </div>
+  </div>
+
+  <!-- colored hero band: primary per-project signifier. Full-bleed in the project's accent,
+       so opening the page reads instantly as "this project" before any reading. -->
+  <div id="overview" class="proj-hero">
+    <div class="wrap">
+      <h1 class="d-title">Celengan: Investment for Rural Women Entrepreneurs</h1>
+      <div class="d-meta-row">
+        <div class="cell"><span data-icon="role"></span><b>Role</b><span>Product Designer</span></div>
+        <div class="cell"><span data-icon="calendar"></span><b>Year</b><span>2024</span></div>
+        <div class="cell"><span data-icon="company"></span><b>Company</b><span><img class="meta-logo" src="assets/company-logos/logo-amartha.png" alt="">Amartha</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <div class="d-section" style="border-bottom:none; padding:24px 0 0;">
+      <img class="proj-banner" src="projects/celengan/images/celengan_cover.png" alt="Celengan cover">
+    </div>
+
+    <div class="d-section" style="border-bottom:none; padding:44px 0 48px;">
+      <div class="section-h2 tight">Achievement</div>
+      <div class="section-sub">Celengan product metrics, 2024 to Jan 2026</div>
+      <div class="metrics-box">
+        <div class="metric"><div class="m-icon" data-icon="transaction"></div><div class="num">67K</div><div class="lbl">Monthly transaction unit</div></div>
+        <div class="metric"><div class="m-icon" data-icon="money"></div><div class="num">Rp63.85B</div><div class="lbl">Gross merchandise value</div></div>
+        <div class="metric"><div class="m-icon" data-icon="userplus"></div><div class="num">15K+</div><div class="lbl">Monthly new user</div></div>
+      </div>
+    </div>
+
+    <div class="d-section" style="border-bottom:none; padding:0 0 28px;">
+      <div class="intro-copy" style="max-width:none;">
+        <div class="hc-label">What is Celengan?</div>
+        <p>Celengan is an investment product for Amartha's rural women borrowers. It adapts the saving habits they already have and adds something those habits never gave them: a recurring passive return.</p>
+      </div>
+    </div>
+
+    <div id="problem" class="d-section" style="padding-top:28px;">
+      <h2 class="section-h2">User research: Understanding mitra</h2>
+      <div class="below-img" style="margin-top:0; margin-bottom:36px;">
+        <img src="projects/celengan/images/celengan_research.png" alt="User interview sessions with borrowers">
+        <div class="ph-label">User interview sessions with borrowers</div>
+      </div>
+
+      <div class="subsection">
+        <div class="text">
+          <div class="sentence-title">Our core users already save, but in ways that earn them nothing.</div>
+          <p>Amartha's largest segment is its women borrowers, up to 3.3 million of them. Most already save regularly, just through inconvenient channels: arisan (rotating savings groups), cooperatives, and cash kept at home. None of these earn a return; they only store money.</p>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="text">
+          <div class="sentence-title">Celengan gives them a better way to save.</div>
+          <p>That gap was the opening: a way to keep saving, but now earning a recurring return, and one that fits their wider financial life at Amartha, where the same relationship already covers borrowing and repayment. None of them had invested like this before, yet our interviews and concept testing showed they grasped the idea quickly, a real step forward for financial literacy in rural areas.</p>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="text">
+          <div class="sentence-title">User journey map</div>
+          <p>From the research, I mapped out how borrowers save today, a reference point for the rest of the design.</p>
+        </div>
+        <div class="below-img">
+          <img src="projects/celengan/images/celengan_journey.png" alt="Celengan user journey map">
+        </div>
+      </div>
+    </div>
+
+    <div id="solution" class="d-section">
+      <h2 class="section-h2">Crafting the solution</h2>
+      <p style="margin-bottom:40px;">From these insights, we shaped Celengan around two core flows that mirror how borrowers already handle money: putting money in to earn a return (<b>invest</b>), and taking it back out when they need it (<b>divest</b>).</p>
+
+      <div class="flow-group">
+        <div class="flow-name">Highlighted flow: invest flow</div>
+        <p class="flow-context">Borrowers already set aside at least Rp10,000 a week for arisan, which told us the saving capacity was there. They save toward specific goals (their children's education, Lebaran, emergencies), and these usually follow a predictable timeline, such as school fees at the start of each academic year or savings spent every Lebaran.</p>
+
+        <div class="flow-h3">Opportunity</div>
+        <table class="opp-table">
+          <thead><tr><th>Rationale</th><th>Opportunity</th><th>Impact</th></tr></thead>
+          <tbody>
+            <tr><td>Borrowers already save regularly through arisan, but without any return</td><td>Offer a saving vehicle that pays a recurring return</td><td>Saving becomes productive instead of just storing money</td></tr>
+            <tr><td>Borrowers' saving goals follow a fixed timeline (Lebaran, school fees)</td><td>Offer tenure options that match those timelines</td><td>Borrowers can save with intent toward their actual needs</td></tr>
+            <tr><td>Borrowers are new to investing and still default to holding cash</td><td>Explain the investment scheme in the invest flow using simple language</td><td>Improves financial literacy and financial inclusion</td></tr>
+          </tbody>
+        </table>
+
+        <div class="flow-h3">Information architecture + user flow</div>
+        <p style="margin-bottom:14px;">Here is the IA and flow, mapped through breadboarding.</p>
+        <div class="below-img" style="margin-top:0; margin-bottom:28px;">
+          <img src="projects/celengan/images/invest-information-architecture.png" alt="Invest flow information architecture, breadboarding">
+        </div>
+
+        <div class="flow-proto">
+          <div class="flow-proto-note">
+            <div class="flow-h3">Try it yourself</div>
+            <p>This is a fully interactive Figma prototype of the invest flow, from selecting a product to confirming the investment.</p>
+            <div class="hint">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span>Click and scroll inside the screen to try it!</span>
+            </div>
+          </div>
+          <div class="proto-phone">
+            <div class="screen">
+              <iframe src="https://www.figma.com/embed?embed_host=share&hide-ui=1&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FW0T1qMMemGw4rsgBbiqe5h%2FPortfolio-2025%3Fpage-id%3D293%253A21607%26node-id%3D2061-71825%26viewport%3D-4256%252C-1219%252C0.17%26t%3DJaJ33fAGz9PPe2D4-1%26scaling%3Dmin-zoom%26content-scaling%3Dfixed%26starting-point-node-id%3D2061%253A71825%26hide-ui%3D1" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="dashed-divider">
+
+      <div class="flow-group">
+        <div class="flow-name">Highlighted flow: divest flow</div>
+        <p class="flow-context">Sometimes borrowers need their money back for something sudden, like medical costs or an unplanned expense. So the flow had to state clearly whether an asset could be withdrawn anytime or only at the end of its term.</p>
+
+        <div class="flow-h3">Opportunity</div>
+        <table class="opp-table">
+          <thead><tr><th>Rationale</th><th>Opportunity</th><th>Impact</th></tr></thead>
+          <tbody>
+            <tr><td>Borrowers may need cash unexpectedly, at any point in time</td><td>Offer divest access before the tenure ends</td><td>Borrowers get flexibility in managing their cash flow</td></tr>
+            <tr><td>Borrowers have a habit of saving toward a fixed tenure, such as before Lebaran</td><td>Offer fixed-tenure investment options</td><td>Borrowers can save in line with their actual needs</td></tr>
+            <tr><td>Encouraging borrowers to hold their asset rather than divest early</td><td>Show the potential return borrowers give up if they divest now</td><td>Borrowers are more likely to retain the asset and keep earning the return</td></tr>
+          </tbody>
+        </table>
+
+        <div class="flow-h3">Information architecture + user flow</div>
+        <p style="margin-bottom:14px;">Here is the IA and flow, mapped through breadboarding.</p>
+        <div class="below-img" style="margin-top:0; margin-bottom:28px;">
+          <img src="projects/celengan/images/divest-information-architecture.png" alt="Divest flow information architecture, breadboarding">
+        </div>
+
+        <div class="flow-proto">
+          <div class="flow-proto-note">
+            <div class="flow-h3">Try it yourself</div>
+            <p>This is a fully interactive Figma prototype of the divest flow, from picking an asset to confirming the withdrawal.</p>
+            <div class="hint">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span>Click and scroll inside the screen to try it!</span>
+            </div>
+          </div>
+          <div class="proto-phone">
+            <div class="screen">
+              <iframe src="https://www.figma.com/embed?embed_host=share&hide-ui=1&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FW0T1qMMemGw4rsgBbiqe5h%2FPortfolio-2025%3Fpage-id%3D293%253A21607%26node-id%3D2061-72865%26viewport%3D-4256%252C-1219%252C0.17%26t%3DJaJ33fAGz9PPe2D4-1%26scaling%3Dmin-zoom%26content-scaling%3Dfixed%26starting-point-node-id%3D2061%253A72865%26hide-ui%3D1" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="testing" class="d-section">
+      <h2 class="section-h2">Usability testing</h2>
+      <p class="ut-intro">I tested the invest and divest flows with users from both segments. Both could complete the flows end to end, so the core journeys held up, but three findings still surfaced. Here is what each one led to.</p>
+
+      <div class="ut-tablist" role="tablist">
+        <button class="ut-tab active" data-uttab="0">Tenure selection</button>
+        <button class="ut-tab" data-uttab="1">Product comparison</button>
+        <button class="ut-tab" data-uttab="2">Investment date</button>
+      </div>
+
+      <div class="ut-finding" data-utpanel="0">
+        <p class="ut-insight">Users had no trouble entering the amount and tenure or reading the expected returns. The only quirk: most tapped the whole card rather than its radio button when choosing a tenure. That was harmless, since the card tap selected it anyway.</p>
+        <div class="ut-compare">
+          <div class="ut-col">
+            <div class="col-label">Tested design</div>
+            <div class="ut-shot"><img src="projects/celengan/images/celengan_ut-tenure.png" alt="Tenure selection screen"></div>
+          </div>
+          <div class="ut-col">
+            <div class="col-label">Result</div>
+            <div class="ut-shot ut-shot-passed">
+              <img src="projects/celengan/images/celengan_ut-tenure.png" alt="Tenure selection screen, passed as-is">
+              <div class="ut-overlay"><span class="ut-check" data-icon="check"></span>Passed</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ut-finding hidden" data-utpanel="1">
+        <p class="ut-insight">Almost everyone chose a product by its tenure and rate, and could tell the options apart; they clearly understood both the interest rate and the tenure. To lean into that, I refined the product card so those two attributes read more clearly and consistently.</p>
+        <div class="ut-compare">
+          <div class="ut-col">
+            <div class="col-label">Tested design</div>
+            <div class="ut-shot"><img src="projects/celengan/images/celengan_ut-products-before.png" alt="Product list, tested version"></div>
+          </div>
+          <div class="ut-col">
+            <div class="col-label">Improved design</div>
+            <div class="ut-shot"><img src="projects/celengan/images/celengan_ut-products-after.png" alt="Product list, improved version"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ut-finding hidden" data-utpanel="2">
+        <p class="ut-insight">A few users misread the maturity date as the investment's start date, and some held onto that assumption even after reading the label. I reworked how the date and status are shown so the end-of-term date is unmistakable.</p>
+        <div class="ut-compare">
+          <div class="ut-col">
+            <div class="col-label">Tested design</div>
+            <div class="ut-shot"><img src="projects/celengan/images/celengan_ut-date-before.png" alt="Asset detail / date, tested version"></div>
+          </div>
+          <div class="ut-col">
+            <div class="col-label">Improved design</div>
+            <div class="ut-shot"><img src="projects/celengan/images/celengan_ut-date-after.png" alt="Asset detail / date, improved version"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- design-system note demoted below UT (too technical for the main narrative);
+         same format as other sections: H2 → image → paragraph -->
+    <div class="d-section">
+      <h2 class="section-h2">Built with a local component library</h2>
+      <div class="below-img" style="margin-top:0; margin-bottom:16px;">
+        <img src="projects/celengan/images/celengan_components.png" alt="Celengan local component set in Figma">
+      </div>
+      <ul class="bullet-list">
+        <li>For this project I built and maintained my own components and variants in Figma, evidence that I can create and keep a design system consistent at the project level.</li>
+        <li>The library also sped up my own work, since many components were reused across screens, and other designers picked them up too, on cross-team projects touching mitra and Celengan.</li>
+      </ul>
+    </div>
+
+    <div id="summary" class="d-section">
+      <h2 class="section-h2">Summary</h2>
+      <div class="summary-stack">
+        <div>
+          <h4>Lesson learnt</h4>
+          <ul class="bullet-list">
+            <li>Designing an investment product for users with low financial literacy means keeping everything as simple as possible, and dropping the financial jargon people usually take for granted.</li>
+            <li>Many borrowers have little money left over to set aside, so adoption of Celengan takes time.</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Next iteration</h4>
+          <ul class="bullet-list">
+            <li>Given timeline and effort constraints, we couldn't yet support divesting a custom, free-form amount.</li>
+            <li>After an investment matures, many borrowers leave the money idle, a clear opportunity to prompt a reinvestment.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- full-bleed band with a darker ground than the white case-study content, so "other projects"
+       reads as a distinct wayfinding zone rather than another content section -->
+  <div class="other-projects">
+    <div class="wrap">
+      <div class="section-h2">Other projects</div>
+      <div class="grid2">
+        <a class="proj-card" onclick="openDetail('detailView-ggs'); return false" href="#">
+          <img class="thumb" src="projects/grassroots/images/grassroots_cover.png" alt="Grassroots Growth Series cover">
+          <div class="card-body">
+            <h3>Grassroots Growth Series: Impact Investing for Urban Lenders</h3>
+            <div class="company-row"><img src="assets/company-logos/logo-amartha.png" alt="">Amartha</div>
+            <div class="meta-line">2026</div>
+          </div>
+        </a>
+        <a class="proj-card is-soon" onclick="return false" href="#">
+          <img class="thumb" src="projects/mentoring/images/mentoring_cover.png" alt="Mentoring Potential Talent to Achieve Their UX Dream Jobs cover">
+          <div class="card-body">
+            <h3>Mentoring Potential Talent to Achieve Their UX Dream Jobs</h3>
+            <div class="company-row"><img src="assets/company-logos/logo-dibimbing.png" alt="">Dibimbing.id</div>
+            <div class="meta-line">2021 – 2025</div>
+          </div>
+        </a>
+        <a class="proj-card is-soon" onclick="return false" href="#">
+          <img class="thumb" src="projects/buyer-discovery/images/homepage-content.webp" alt="Improving Buyer's Discovery and Learning Experience cover">
+          <div class="card-body">
+            <h3>Improving Buyer's Discovery and Learning Experience</h3>
+            <div class="company-row"><img src="assets/company-logos/logo-tokopedia.png" alt="">Tokopedia</div>
+            <div class="meta-line">2022</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>Celengan — Amartha, 2024</span>
+    </div>
+  </footer>
+</div>
+
+<div id="detailView-ggs" class="hidden theme-grassroots detail-view">
+  <nav class="top">
+    <div class="wrap detail-nav">
+      <a class="text-btn back" onclick="openHome(); return false" href="#"><span data-icon="back"></span> Back to work</a>
+    </div>
+  </nav>
+
+  <div class="sub-nav">
+    <div class="wrap">
+      <a href="#overview-ggs">Overview</a>
+      <a href="#problem-ggs">Problem</a>
+      <a href="#solution-ggs">Solution</a>
+      <a href="#summary-ggs">Summary</a>
+    </div>
+  </div>
+
+  <div id="overview-ggs" class="proj-hero">
+    <div class="wrap">
+      <h1 class="d-title">Grassroots Growth Series: Impact Investing for Urban Lenders</h1>
+      <div class="d-meta-row">
+        <div class="cell"><span data-icon="role"></span><b>Role</b><span>Product Designer</span></div>
+        <div class="cell"><span data-icon="calendar"></span><b>Year</b><span>2026</span></div>
+        <div class="cell"><span data-icon="company"></span><b>Company</b><span><img class="meta-logo" src="assets/company-logos/logo-amartha.png" alt="">Amartha</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <div class="d-section" style="border-bottom:none; padding:24px 0 0;">
+      <img class="proj-banner" src="projects/grassroots/images/grassroots_cover.png" alt="Grassroots Growth Series cover">
+    </div>
+
+    <div class="d-section" style="border-bottom:none; padding:44px 0 48px;">
+      <div class="section-h2 tight">Achievement</div>
+      <div class="section-sub">Grassroots Growth Series product metrics, Jan to Sep 2026</div>
+      <div class="metrics-box">
+        <div class="metric"><div class="m-icon" data-icon="money"></div><div class="num">Rp2B</div><div class="lbl">Disbursed to borrowers</div></div>
+        <div class="metric"><div class="m-icon" data-icon="userplus"></div><div class="num">18K+</div><div class="lbl">Monthly new user</div></div>
+        <div class="metric"><div class="m-icon" data-icon="transaction"></div><div class="num">320K</div><div class="lbl">Registered investor</div></div>
+      </div>
+    </div>
+
+    <div class="d-section" style="border-bottom:none; padding:0 0 28px;">
+      <div class="intro-copy" style="max-width:none;">
+        <div class="hc-label">What is Grassroots Growth Series?</div>
+        <p>Grassroots Growth Series is an impact investing product for Amartha's urban lenders. Their money is channeled to micro and small entrepreneurs (UMKM) across rural Indonesia and spread across many borrowers at once, so each lender's capital is diversified and the chance of loss is reduced. The tiers carry different rates, letting lenders match the product to their own risk appetite, while every rupiah still funds real businesses on the ground.</p>
+      </div>
+    </div>
+
+    <div id="problem-ggs" class="d-section" style="padding-top:28px;">
+      <h2 class="section-h2">User research: Understanding investors</h2>
+      <div class="below-img" style="margin-top:0; margin-bottom:36px;">
+        <img src="projects/grassroots/images/grassroots_research.png" alt="Interview and concept testing sessions with investors">
+      </div>
+
+      <div class="subsection">
+        <div class="text">
+          <div class="sentence-title">Investors look for diversification.</div>
+          <p>Among affluent participants, the largest group (31.25%) prioritizes diversification, spreading risk across assets. Capital preservation (low-risk investment) and high returns (at higher risk) follow, each at 25%. In short, affluent users are open to new instruments that protect the value of their money and grow it.</p>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="text">
+          <div class="sentence-title">Liquidity is still a concern, especially for higher-risk investments.</div>
+          <p>Investors tend to associate higher-risk investing with instruments like stocks or crypto, and the moment one stops performing as they expect, they liquidate it. They also expect the rules to differ from product to product, including penalties for early divestment.</p>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="text">
+          <div class="sentence-title">Impact is part of what motivates them to invest.</div>
+          <p>What draws investors to Amartha is the social impact on women-led MSMEs, with the Grameen method (tanggung renteng, or group liability) acting as the built-in risk mitigation. Many were curious what other safeguards Amartha has in place to keep repayment quality high.</p>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="text">
+          <div class="sentence-title">User journey map</div>
+          <p>From the research, I mapped how investors approach investing today, a reference point for the rest of the design.</p>
+        </div>
+        <div class="below-img">
+          <img src="projects/grassroots/images/grassroots_journey.png" alt="Grassroots Growth Series user journey map">
+        </div>
+      </div>
+    </div>
+
+    <div id="solution-ggs" class="d-section">
+      <h2 class="section-h2">Crafting the solution</h2>
+      <p style="margin-bottom:40px;">Because investors actively seek diversification, Grassroots Growth Series fits their behavior well: by design, each investor's funds are spread across many borrowers. From these insights, we shaped the product around three flows that mirror how investors manage money: investing across many borrowers (<b>invest</b>), keeping an eye on it (<b>monitor</b>), and taking it back when circumstances change (<b>divest</b>).</p>
+
+      <div class="flow-group">
+        <div class="flow-name">Highlighted flow: invest flow</div>
+        <p class="flow-context">Investors want to match an investment to their own risk appetite, and they want to understand the details before they commit. The invest flow leads with tier choice, then opens a detail page that lays out the scheme, the returns, and who receives the funds.</p>
+
+        <div class="flow-h3">Opportunity</div>
+        <table class="opp-table">
+          <thead><tr><th>Rationale</th><th>Opportunity</th><th>Impact</th></tr></thead>
+          <tbody>
+            <tr><td>Each investor has their own risk appetite</td><td>Investment tiers with distinct specs: Dynamic (high risk, Rp250M min, 14% p.a.), Progressive (mid risk, Rp100M min, 11% p.a.), Balanced (low risk, Rp1M min, 5% p.a.)</td><td>Investors are free to pick the tier that fits them</td></tr>
+            <tr><td>Investors need to study the details before committing</td><td>An investment detail page covering the essentials: the scheme, the returns, and who receives the funds</td><td>Clarity before investors commit</td></tr>
+            <tr><td>Investors want easy liquidity as a safeguard if an investment underperforms</td><td>A flexible divest process, with an early-withdrawal penalty before 12 months to protect the business</td><td>A clear exit for investors, while the penalty keeps Amartha's funding stable</td></tr>
+          </tbody>
+        </table>
+
+        <div class="flow-h3">Information architecture + user flow</div>
+        <p style="margin-bottom:14px;">Here is the IA and flow, mapped through breadboarding.</p>
+        <div class="below-img" style="margin-top:0; margin-bottom:28px;">
+          <div class="ph" data-icon="image"></div>
+          <div class="ph-label">Image needed: invest flow information architecture, breadboarding</div>
+        </div>
+
+        <div class="flow-proto">
+          <div class="flow-proto-note">
+            <div class="flow-h3">Try it yourself</div>
+            <p>This is a fully interactive Figma prototype of the invest flow, from picking an investment tier to confirming the investment.</p>
+            <div class="hint">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span>Click and scroll inside the screen to try it!</span>
+            </div>
+          </div>
+          <div class="proto-phone">
+            <div class="screen">
+              <iframe src="https://www.figma.com/embed?embed_host=share&hide-ui=1&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FW0T1qMMemGw4rsgBbiqe5h%2FPortfolio-2025%3Fpage-id%3D293%253A21607%26node-id%3D2156-89040%26viewport%3D-5386%252C-629%252C0.17%26t%3DLUyz2o5TVyHIBX6V-1%26scaling%3Dmin-zoom%26content-scaling%3Dfixed%26starting-point-node-id%3D2156%253A89040%26show-proto-sidebar%3D1&hide-ui=1" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="dashed-divider">
+
+      <div class="flow-group">
+        <div class="flow-name">Highlighted flow: monitor &amp; divest flow</div>
+        <p class="flow-context">Once invested, lenders want to see how their money is performing and to take it back when circumstances change, such as medical costs or an unplanned expense. The flow gives them visibility into each asset and a clear, rule-based way to withdraw.</p>
+
+        <div class="flow-h3">Opportunity</div>
+        <table class="opp-table">
+          <thead><tr><th>Rationale</th><th>Opportunity</th><th>Impact</th></tr></thead>
+          <tbody>
+            <tr><td>Investors need to monitor their investment to make decisions about their assets</td><td>An asset detail page showing each asset's state, such as return history and activity history</td><td>Investors can act on real information and stay in control</td></tr>
+            <tr><td>Investors need liquidity in their investments</td><td>A flexible withdrawal feature, available monthly and in any amount</td><td>Builds a sense of security and trust in the product</td></tr>
+            <tr><td>Amartha needs to protect business stability and cash flow, so assets cannot be withdrawn too freely</td><td>A withdrawal fee for assets younger than 12 months</td><td>Protects the company's cash flow</td></tr>
+          </tbody>
+        </table>
+
+        <div class="flow-h3">Information architecture + user flow</div>
+        <p style="margin-bottom:14px;">Here is the IA and flow, mapped through breadboarding.</p>
+        <div class="below-img" style="margin-top:0; margin-bottom:28px;">
+          <div class="ph" data-icon="image"></div>
+          <div class="ph-label">Image needed: monitor &amp; divest flow information architecture, breadboarding</div>
+        </div>
+
+        <div class="flow-proto">
+          <div class="flow-proto-note">
+            <div class="flow-h3">Try it yourself</div>
+            <p>This is a fully interactive Figma prototype of the monitor &amp; divest flow, from checking an asset's status to confirming the withdrawal.</p>
+            <div class="hint">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span>Click and scroll inside the screen to try it!</span>
+            </div>
+          </div>
+          <div class="proto-phone">
+            <div class="screen">
+              <iframe src="https://www.figma.com/embed?embed_host=share&hide-ui=1&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FW0T1qMMemGw4rsgBbiqe5h%2FPortfolio-2025%3Fpage-id%3D293%253A21607%26node-id%3D2156-95684%26viewport%3D-5386%252C-629%252C0.17%26t%3DLUyz2o5TVyHIBX6V-9%26scaling%3Dmin-zoom%26content-scaling%3Dfixed%26starting-point-node-id%3D2156%253A95684%26show-proto-sidebar%3D1&hide-ui=1" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="d-section">
+      <h2 class="section-h2">Built with a local component library</h2>
+      <div class="below-img" style="margin-top:0; margin-bottom:16px;">
+        <img src="projects/grassroots/images/grassroots_components.png" alt="Grassroots Growth Series local component set in Figma">
+      </div>
+      <ul class="bullet-list">
+        <li>For this project I built and maintained my own components and variants in Figma, evidence that I can create and keep a design system consistent at the project level.</li>
+        <li>The library also sped up my own work, since many components were reused across screens, and other designers picked them up too, on cross-team projects touching Grassroots Growth Series.</li>
+      </ul>
+    </div>
+
+    <div id="summary-ggs" class="d-section">
+      <h2 class="section-h2">Summary</h2>
+      <div class="summary-stack">
+        <div>
+          <h4>Lesson learnt</h4>
+          <ul class="bullet-list">
+            <li>This project shaped how I understand an investor's thought process before committing to a product, so I now know what they weigh when choosing an investment and how they expect to manage it afterward.</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Next iteration</h4>
+          <ul class="bullet-list">
+            <li>To grow new user acquisition, we will build a referral program.</li>
+            <li>We will keep iterating on the investment catalog's specs to find what best fits the investor market.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="other-projects">
+    <div class="wrap">
+      <div class="section-h2">Other projects</div>
+      <div class="grid2">
+        <a class="proj-card" onclick="openDetail('detailView'); return false" href="#">
+          <img class="thumb" src="projects/celengan/images/celengan_cover.png" alt="Celengan cover">
+          <div class="card-body">
+            <h3>Celengan: Investment for Rural Women Entrepreneurs</h3>
+            <div class="company-row"><img src="assets/company-logos/logo-amartha.png" alt="">Amartha</div>
+            <div class="meta-line">2024</div>
+          </div>
+        </a>
+        <a class="proj-card is-soon" onclick="return false" href="#">
+          <img class="thumb" src="projects/mentoring/images/mentoring_cover.png" alt="Mentoring Potential Talent to Achieve Their UX Dream Jobs cover">
+          <div class="card-body">
+            <h3>Mentoring Potential Talent to Achieve Their UX Dream Jobs</h3>
+            <div class="company-row"><img src="assets/company-logos/logo-dibimbing.png" alt="">Dibimbing.id</div>
+            <div class="meta-line">2021 – 2025</div>
+          </div>
+        </a>
+        <a class="proj-card is-soon" onclick="return false" href="#">
+          <img class="thumb" src="projects/buyer-discovery/images/homepage-content.webp" alt="Improving Buyer's Discovery and Learning Experience cover">
+          <div class="card-body">
+            <h3>Improving Buyer's Discovery and Learning Experience</h3>
+            <div class="company-row"><img src="assets/company-logos/logo-tokopedia.png" alt="">Tokopedia</div>
+            <div class="meta-line">2022</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>Grassroots Growth Series — Amartha, 2026</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+  function fillIcons(){
+    var map = {
+      image: document.getElementById('icon-image').innerHTML,
+      back: document.getElementById('icon-back').innerHTML,
+      mail: document.getElementById('icon-mail').innerHTML,
+      phone: document.getElementById('icon-phone').innerHTML,
+      linkedin: document.getElementById('icon-linkedin').innerHTML,
+      role: document.getElementById('icon-role').innerHTML,
+      calendar: document.getElementById('icon-calendar').innerHTML,
+      company: document.getElementById('icon-company').innerHTML,
+      transaction: document.getElementById('icon-transaction').innerHTML,
+      money: document.getElementById('icon-money').innerHTML,
+      userplus: document.getElementById('icon-userplus').innerHTML,
+      check: document.getElementById('icon-check').innerHTML
+    };
+    document.querySelectorAll('[data-icon]').forEach(function(el){
+      var key = el.getAttribute('data-icon');
+      if(map[key]) el.innerHTML = map[key] + (el.innerHTML || '');
+    });
+  }
+  // multiple project detail pages share this same markup/behavior, each wrapped in
+  // its own ".detail-view" — only one is ever visible at a time, so helpers below
+  // always scope to whichever one is currently shown instead of a single hardcoded id.
+  function activeDetailView(){ return document.querySelector('.detail-view:not(.hidden)'); }
+  function syncSubNavOffset(){
+    var view = activeDetailView();
+    if(!view) return;
+    var nav = view.querySelector('nav.top');
+    var subNav = view.querySelector('.sub-nav');
+    if(nav && subNav) subNav.style.top = nav.getBoundingClientRect().height + 'px';
+  }
+  var sectionSpyObserver = null;
+  function setupSectionSpy(){
+    if(sectionSpyObserver) sectionSpyObserver.disconnect();
+    var view = activeDetailView();
+    if(!view) return;
+    var links = Array.from(view.querySelectorAll('.sub-nav a'));
+    var sections = links
+      .map(function(a){ return document.querySelector(a.getAttribute('href')); })
+      .filter(Boolean);
+    function activate(id){
+      links.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href') === '#' + id); });
+    }
+    // fires when a section's band crosses the middle of the viewport (below the sticky headers) —
+    // reads naturally as "whichever section is currently being read"
+    sectionSpyObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){ if(entry.isIntersecting) activate(entry.target.id); });
+    }, { rootMargin:'-45% 0px -50% 0px', threshold:0 });
+    sections.forEach(function(sec){ sectionSpyObserver.observe(sec); });
+    if(sections[0]) activate(sections[0].id);
+  }
+  function openDetail(id){
+    id = id || 'detailView';
+    document.getElementById('homeView').classList.add('hidden');
+    document.querySelectorAll('.detail-view').forEach(function(v){ v.classList.add('hidden'); });
+    document.getElementById(id).classList.remove('hidden');
+    window.scrollTo(0,0); syncSubNavOffset(); setupSectionSpy();
+  }
+  function openHome(){
+    document.querySelectorAll('.detail-view').forEach(function(v){ v.classList.add('hidden'); });
+    document.getElementById('homeView').classList.remove('hidden'); window.scrollTo(0,0);
+  }
+  window.addEventListener('resize', syncSubNavOffset);
+
+  // Sub-nav tab click: scroll manually instead of relying on the browser's default anchor
+  // jump — this guarantees it always works, always animates smoothly, and always lands
+  // exactly below both sticky headers (measured live, not guessed).
+  function scrollToSection(id){
+    var target = document.getElementById(id);
+    if(!target) return;
+    var view = activeDetailView();
+    var nav = view ? view.querySelector('nav.top') : null;
+    var subNav = view ? view.querySelector('.sub-nav') : null;
+    var offset = (nav ? nav.getBoundingClientRect().height : 0) + (subNav ? subNav.getBoundingClientRect().height : 0) + 16;
+    var top = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
+    if(view){
+      view.querySelectorAll('.sub-nav a').forEach(function(a){
+        a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+      });
+    }
+  }
+  // delegated on document since each project's detail view has its own .sub-nav
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('.sub-nav a[href^="#"]');
+    if(!a) return;
+    e.preventDefault();
+    scrollToSection(a.getAttribute('href').slice(1));
+  });
+
+  // usability-testing tabs: show one finding panel at a time
+  document.querySelectorAll('.ut-tab').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var idx = btn.getAttribute('data-uttab');
+      document.querySelectorAll('.ut-tab').forEach(function(b){ b.classList.toggle('active', b === btn); });
+      document.querySelectorAll('.ut-finding[data-utpanel]').forEach(function(p){
+        p.classList.toggle('hidden', p.getAttribute('data-utpanel') !== idx);
+      });
+    });
+  });
+
+  fillIcons();
+</script>
+</body>
+</html>

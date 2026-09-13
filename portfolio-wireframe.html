@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio — Low-fi Wireframe v3</title>
+<style>
+  :root{ --ink:#1a1a1a; --line:#1a1a1a; --gray:#e4e4e4; --mid:#8a8a8a; --body:#444; }
+  *{box-sizing:border-box;}
+  body{ font-family:Arial, Helvetica, sans-serif; margin:0; color:var(--ink); background:#fff; }
+  .page-label{ background:#1a1a1a; color:#fff; font-size:12px; padding:8px 32px; }
+  .note{ background:#fff8e1; color:#7a5c00; font-size:11px; padding:6px 32px; border-bottom:1px solid #f0dfa0; }
+  .frame{ max-width:960px; margin:0 auto; border-left:1px solid #eee; border-right:1px solid #eee; }
+  .hidden{ display:none; }
+  .ph-icon{ background:var(--gray); display:flex; align-items:center; justify-content:center; color:var(--mid); }
+  .ph-icon svg{ width:28px; height:28px; }
+  p, span, div.copy{ font-size:14px; line-height:1.6; color:var(--body); margin:0; }
+  a{ color:inherit; }
+
+  /* NAV — simplified per feedback: dropped "Work" anchor */
+  nav.home-nav, .detail-nav{ display:flex; justify-content:space-between; align-items:center; padding:20px 40px; border-bottom:1px solid #eee; font-size:13px; }
+  nav.home-nav .logo{ font-weight:bold; font-size:15px; }
+  nav.home-nav .links{ display:flex; gap:24px; color:var(--mid); }
+  nav.home-nav .links a{ text-decoration:none; cursor:pointer; }
+  nav.home-nav .links a:hover{ color:var(--ink); }
+  .detail-nav span, .detail-nav a{ color:var(--mid); cursor:pointer; text-decoration:none; }
+  .detail-nav .back:hover{ text-decoration:underline; }
+
+  /* HOMEPAGE */
+  .hero{ display:flex; gap:40px; padding:48px 40px; align-items:flex-start; }
+  .hero .photo{ width:110px; height:110px; border-radius:50%; flex-shrink:0; }
+  .hero h1{ font-size:22px; margin:0 0 4px; }
+  .hero .role{ font-size:14px; color:var(--mid); margin-bottom:14px; }
+  .hero .bio{ max-width:520px; margin-bottom:20px; }
+  .hero .cta{ display:inline-block; padding:10px 20px; border:1px solid var(--line); font-size:13px; cursor:pointer; text-decoration:none; color:var(--ink); }
+  .section-tag{ padding:0 40px; font-size:12px; color:var(--mid); text-transform:uppercase; letter-spacing:.03em; margin:8px 0 16px; }
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:32px 24px; padding:0 40px 60px; }
+  .proj-card{ cursor:pointer; }
+  .proj-card .thumb{ width:100%; aspect-ratio:4/3; margin-bottom:14px; }
+  .proj-card:hover .thumb{ background:#d5d5d5; }
+  .proj-card h3{ font-size:15px; margin:0 0 4px; }
+  .proj-card .meta{ font-size:12px; color:var(--mid); }
+  .contact-row{ padding:0 40px 48px; display:flex; gap:24px; flex-wrap:wrap; font-size:13px; }
+  .contact-row a{ color:var(--body); text-decoration:none; border-bottom:1px solid transparent; }
+  .contact-row a:hover{ border-color:var(--body); }
+
+  /* DETAIL sticky sub-nav */
+  .sub-nav{ position:sticky; top:0; z-index:5; background:#fff; border-bottom:1px solid #eee; display:flex; gap:24px; padding:14px 40px; font-size:12px; overflow-x:auto; white-space:nowrap; }
+  .sub-nav a{ color:var(--mid); text-decoration:none; }
+  .sub-nav a:hover{ color:var(--ink); }
+
+  .d-block{ padding:36px 40px; border-bottom:1px solid #eee; scroll-margin-top:52px; }
+  .d-block .tag{ font-size:11px; color:var(--mid); text-transform:uppercase; letter-spacing:.03em; margin-bottom:10px; }
+  .d-title{ font-size:24px; margin:0 0 12px; }
+
+  /* meta row now carries role/company/year/contribution together — feedback #4 */
+  .d-meta-row{ display:flex; gap:24px; flex-wrap:wrap; font-size:12px; color:var(--mid); }
+  .d-meta-row b{ display:block; color:var(--ink); font-size:13px; margin-bottom:2px; }
+  .d-meta-row .cell{ min-width:120px; }
+
+  /* metrics with icons + bigger label — feedback #5 */
+  .metrics{ display:flex; gap:32px; margin-top:22px; padding-top:22px; border-top:1px solid #eee; flex-wrap:wrap; }
+  .metric{ display:flex; gap:10px; align-items:flex-start; }
+  .metric .m-icon{ width:32px; height:32px; border-radius:6px; flex-shrink:0; }
+  .metric .m-icon svg{ width:16px; height:16px; }
+  .metric .num{ font-size:20px; font-weight:bold; line-height:1.2; }
+  .metric .lbl{ font-size:12px; color:var(--mid); margin-top:2px; }
+
+  .context-line{ font-size:14px; color:var(--ink); margin-bottom:14px; font-weight:bold; }
+  .gallery-hero{ width:100%; aspect-ratio:16/9; margin-bottom:16px; }
+  .gallery-sub{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .gallery-sub .ph-icon{ aspect-ratio:4/3; }
+
+  /* design system badge — feedback #13 */
+  .ds-badge{ display:flex; align-items:center; gap:12px; margin-top:16px; padding:12px 14px; border:1px solid #eee; }
+  .ds-badge .ph-icon{ width:48px; height:36px; flex-shrink:0; }
+  .ds-badge .ds-text b{ display:block; font-size:12px; }
+  .ds-badge .ds-text span{ font-size:11px; color:var(--mid); }
+
+  /* sentence-title sub-sections for Problem / Solution — feedback #6.
+     Image (if any) standardized to sit BELOW the paragraph, not beside it — keeps
+     detail-heavy screenshots legible and behaves the same at every breakpoint. */
+  .subsection{ margin-bottom:28px; max-width:640px; }
+  .subsection:last-child{ margin-bottom:0; }
+  .subsection .sentence-title{ font-size:15px; font-weight:bold; margin:0 0 8px; line-height:1.4; }
+  .subsection .below-img{ margin-top:14px; }
+  .subsection .below-img .ph-icon{ aspect-ratio:16/9; }
+
+  /* highlighted flow: numbered steps + explanation + prototype CTA — feedback #7 */
+  .flow-group{ margin-bottom:28px; }
+  .flow-group:last-child{ margin-bottom:0; }
+  .flow-group .flow-name{ font-size:14px; font-weight:bold; margin-bottom:10px; }
+  .flow-steps-list{ margin:0 0 14px; padding-left:18px; font-size:13px; color:var(--body); line-height:1.7; }
+  .flow-strip{ display:flex; gap:12px; }
+  .flow-step{ flex:1; text-align:center; }
+  .flow-step .ph-icon{ aspect-ratio:9/16; margin-bottom:6px; }
+  .flow-step span{ font-size:12px; color:var(--mid); }
+  .prototype-btn{ display:inline-flex; align-items:center; gap:8px; margin-top:16px; padding:10px 18px; border:1px solid var(--ink); font-size:13px; cursor:pointer; text-decoration:none; color:var(--ink); }
+
+  /* usability testing: summary paragraph + real table — feedback #8 */
+  .ut-table{ width:100%; border-collapse:collapse; margin-top:16px; font-size:13px; }
+  .ut-table th{ text-align:left; font-size:11px; text-transform:uppercase; color:var(--mid); padding:8px 12px; border-bottom:2px solid var(--ink); }
+  .ut-table td{ padding:12px; border-bottom:1px solid #eee; vertical-align:top; color:var(--body); }
+  .ut-table td:first-child{ width:60px; }
+
+  /* summary stacked, more room — feedback #6 (their point) */
+  .summary-stack > div{ margin-bottom:24px; }
+  .summary-stack > div:last-child{ margin-bottom:0; }
+  .summary-stack h4{ font-size:12px; text-transform:uppercase; color:var(--mid); margin:0 0 8px; }
+
+  footer.detail-footer{ padding:32px 40px; display:flex; justify-content:space-between; align-items:center; font-size:13px; }
+  footer.detail-footer a{ text-decoration:none; border-bottom:1px solid var(--ink); }
+
+  @media(max-width:640px){
+    .hero{ flex-direction:column; gap:20px; }
+    .grid2, .gallery-sub{ grid-template-columns:1fr; }
+    nav.home-nav .links{ gap:14px; }
+    .flow-strip{ flex-wrap:wrap; }
+    .flow-step{ flex:1 1 40%; }
+  }
+</style>
+</head>
+<body>
+
+<template id="icon-image">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+    <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>
+  </svg>
+</template>
+<template id="icon-metric">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+    <path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>
+  </svg>
+</template>
+
+<!-- ================= HOMEPAGE ================= -->
+<div id="homeView">
+<div class="page-label">HOMEPAGE — klik salah satu project card untuk buka detail</div>
+<div class="note">v3 changes: nav disederhanakan (drop "Work"), tagline "I like untangling..." dihapus, CTA &amp; contact jadi real link (mailto/tel/linkedin)</div>
+<div class="frame">
+  <nav class="home-nav">
+    <div class="logo">Ryan Sukma Nesya</div>
+    <div class="links">
+      <a href="#" onclick="return false" style="text-decoration:underline;">Résumé</a>
+      <a href="mailto:ryan@email.com">Contact</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="ph-icon photo"></div>
+    <div>
+      <h1>Ryan Sukma Nesya</h1>
+      <div class="role">Product Designer</div>
+      <p class="bio">Product designer with 7 years of experience across fintech, e-commerce, and SaaS. Currently designing investment and lending products at Amartha.</p>
+      <div style="display:flex; gap:18px; align-items:center;">
+        <a class="cta" href="mailto:ryan@email.com">Contact me</a>
+        <a href="#" onclick="return false" style="font-size:13px; color:var(--mid); text-decoration:underline;">Download résumé (PDF)</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="work" class="section-tag">Selected work — 3 to 4 projects</div>
+  <div class="grid2">
+    <div class="proj-card" onclick="openDetail()">
+      <div class="ph-icon thumb"></div>
+      <h3>Celengan: Investment for Grassroots and Urban Lenders</h3>
+      <div class="meta">Amartha · 2024</div>
+    </div>
+    <div class="proj-card" onclick="openDetail()">
+      <div class="ph-icon thumb"></div>
+      <h3>Project 2 — title placeholder</h3>
+      <div class="meta">Company · Year</div>
+    </div>
+    <div class="proj-card" onclick="openDetail()">
+      <div class="ph-icon thumb"></div>
+      <h3>Project 3 — title placeholder</h3>
+      <div class="meta">Company · Year</div>
+    </div>
+    <div class="proj-card" onclick="openDetail()">
+      <div class="ph-icon thumb"></div>
+      <h3>Project 4 — optional</h3>
+      <div class="meta">Company · Year</div>
+    </div>
+  </div>
+
+  <div id="contact" class="section-tag">Contact</div>
+  <div class="contact-row">
+    <a href="mailto:ryan@email.com">ryan@email.com</a>
+    <a href="tel:+62xxxxxxxxxx">+62 xxx-xxxx-xxxx</a>
+    <a href="#" onclick="return false">LinkedIn</a>
+  </div>
+</div>
+</div>
+
+<!-- ================= PROJECT DETAIL ================= -->
+<div id="detailView" class="hidden">
+<div class="page-label">PROJECT DETAIL — dibuka dari card</div>
+<div class="note">v5: "My contribution"/"Team" dihapus total — end-to-end solo dianggap default, jadi nggak perlu diulang tiap project (jadikan opsional kalau ada project dengan scope beda) · Role/Company/Year tetap normal · metric pakai icon · Problem/Solution jadi sentence-title sub-sections · flow ada explanation + tombol prototype · design system badge · usability testing pakai table · summary di-stack · footer diganti 1 link "Get in touch"</div>
+<div class="frame">
+  <div class="detail-nav">
+    <span class="back" onclick="openHome()">← Back to work</span>
+    <a href="mailto:ryan@email.com">Get in touch</a>
+  </div>
+
+  <div class="sub-nav">
+    <a href="#overview">Overview</a>
+    <a href="#problem">Problem</a>
+    <a href="#process">Process</a>
+    <a href="#flow">Flow</a>
+    <a href="#results">Results</a>
+  </div>
+
+  <div id="overview" class="d-block">
+    <div class="tag">Title + meta</div>
+    <h1 class="d-title">Celengan: Investment for Grassroots and Urban Lenders</h1>
+
+    <div class="d-meta-row">
+      <div class="cell"><b>Role</b>Product Designer</div>
+      <div class="cell"><b>Company</b>Amartha</div>
+      <div class="cell"><b>Year</b>2024</div>
+    </div>
+    <!-- "My contribution" removed: end-to-end solo work is the default assumption across every project,
+         so restating it adds no new info. Keep as an OPTIONAL line only for a project whose scope is
+         genuinely different (e.g. research-only, or co-led with another designer) — write it only then. -->
+
+    <!-- metrics with icon -->
+    <div class="metrics">
+      <div class="metric"><div class="ph-icon m-icon" data-icon="metric"></div><div><div class="num">19K</div><div class="lbl">Monthly transactional users</div></div></div>
+      <div class="metric"><div class="ph-icon m-icon" data-icon="metric"></div><div><div class="num">Rp20B</div><div class="lbl">Gross merchandise value</div></div></div>
+      <div class="metric"><div class="ph-icon m-icon" data-icon="metric"></div><div><div class="num">2</div><div class="lbl">Personas served by one flow</div></div></div>
+    </div>
+  </div>
+
+  <div class="d-block">
+    <div class="tag">Output gallery / prototype — ditaruh duluan</div>
+    <!-- context-line dihapus: redundant sama title + overview di atasnya -->
+    <div style="position:relative;">
+      <div class="ph-icon gallery-hero" style="cursor:pointer; border:2px solid var(--ink);"></div>
+      <div style="position:absolute; top:12px; left:12px; background:var(--ink); color:#fff; font-size:11px; padding:4px 10px; border-radius:4px;">▶ View Figma prototype</div>
+    </div>
+    <div style="font-size:11px; color:var(--mid); margin:12px 0 6px;">UI shots</div>
+    <div class="gallery-sub"><div class="ph-icon"></div><div class="ph-icon"></div></div>
+
+    <!-- design system badge -->
+    <div class="ds-badge">
+      <div class="ph-icon"></div>
+      <div class="ds-text"><b>Built with a local component library</b><span>Components &amp; variants built and maintained specifically for this project's Figma file.</span></div>
+    </div>
+  </div>
+
+  <div id="problem" class="d-block">
+    <div class="tag">Problem identification</div>
+
+    <!-- sentence-title sub-sections, mirroring Notion structure -->
+    <div class="subsection">
+      <div class="text">
+        <div class="sentence-title">Back then, Amartha used to have the high-risk investment product.</div>
+        <p>Amartha provided a high-risk, high-return investment that could profit up to 15% p.a. — quite big compared to other products. But urban lenders faced the risk of losing money, which didn't match their medium-low risk profile, pushing them to invest elsewhere with lower risk (mutual funds, deposits).</p>
+      </div>
+      <div class="below-img"><div class="ph-icon"></div></div>
+    </div>
+    <div class="subsection">
+      <div class="text">
+        <div class="sentence-title">We found that most of our urban lenders prefer low-risk investment.</div>
+        <p>In-depth interviews showed urban lenders mostly invest in low-risk instruments and worry about losing money — they treat their asset as savings rather than a profit vehicle.</p>
+      </div>
+      <div class="below-img"><div class="ph-icon"></div></div>
+    </div>
+    <div class="subsection">
+      <div class="text">
+        <div class="sentence-title">Escalating to the grassroots segment, as the biggest segment.</div>
+        <p>For 15 years, Amartha has had 3.3 million grassroots users — the biggest segment in the company. Leveraging the investment product to this segment would be a massive growth opportunity.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="process" class="d-block">
+    <div class="tag">Solution approach — research, benchmarking</div>
+    <div class="subsection">
+      <div class="text">
+        <div class="sentence-title">Urban lenders: regularly investing, even with a "strategy."</div>
+        <p>They understand investment instruments and already invest regularly — for example, mutual funds for emergency needs, stocks for idle-money profit.</p>
+      </div>
+      <div class="below-img"><div class="ph-icon"></div></div>
+    </div>
+    <div class="subsection">
+      <div class="text">
+        <div class="sentence-title">Grassroots: do not invest, but save regularly.</div>
+        <p>This segment saves weekly or monthly in places like arisan or koperasi, mostly toward a short-term goal (lebaran, children's education), in amounts of Rp10K–100K per month.</p>
+      </div>
+      <div class="below-img"><div class="ph-icon"></div></div>
+    </div>
+  </div>
+
+  <div id="flow" class="d-block">
+    <div class="tag">Highlighted flow — solves the core problem</div>
+
+    <div class="flow-group">
+      <div class="flow-name">Invest flow</div>
+      <ol class="flow-steps-list">
+        <li>User comes from the homepage through the Celengan entry point.</li>
+        <li>User chooses an offering catalog by investment goal, rate, or tenure preference.</li>
+        <li>User sets the investment amount and selects an available tenure.</li>
+        <li>User confirms the investment and gets the receipt.</li>
+      </ol>
+      <div class="flow-strip">
+        <div class="flow-step"><div class="ph-icon"></div><span>Landing</span></div>
+        <div class="flow-step"><div class="ph-icon"></div><span>Choose catalog</span></div>
+        <div class="flow-step"><div class="ph-icon"></div><span>Set amount</span></div>
+        <div class="flow-step"><div class="ph-icon"></div><span>Confirm</span></div>
+      </div>
+    </div>
+
+    <div class="flow-group">
+      <div class="flow-name">Divest flow</div>
+      <ol class="flow-steps-list">
+        <li>User goes to the asset list page from the Celengan landing entry point.</li>
+        <li>User picks the asset to divest and opens the asset detail page.</li>
+        <li>User reads details, monitors progress, and triggers the divestment.</li>
+        <li>System requires double confirmation and shows the profit forfeited if withdrawn before maturity.</li>
+      </ol>
+      <div class="flow-strip">
+        <div class="flow-step"><div class="ph-icon"></div><span>Asset list</span></div>
+        <div class="flow-step"><div class="ph-icon"></div><span>Asset detail</span></div>
+        <div class="flow-step"><div class="ph-icon"></div><span>Confirm</span></div>
+        <div class="flow-step"><div class="ph-icon"></div><span>Done</span></div>
+      </div>
+    </div>
+
+    <a class="prototype-btn" href="#">▶ Try the interactive prototype (Figma)</a>
+    <p style="font-size:12px; color:var(--mid); margin-top:12px;">Note: kalau 3+ flow, di hi-fi ganti jadi tab selector, jangan di-stack.</p>
+  </div>
+
+  <div id="results" class="d-block">
+    <div class="tag">Usability testing — test results</div>
+    <p>To ensure the proposed design works on both segments, we tested with both urban and grassroots users. Both segments could complete invest and divest easily, but three notable gaps came up:</p>
+    <table class="ut-table">
+      <thead><tr><th></th><th>Found</th><th>Fix / status</th></tr></thead>
+      <tbody>
+        <tr><td><div class="ph-icon" style="aspect-ratio:1;"></div></td><td>Users wanted bulk divestment, but the system only supported one asset at a time.</td><td>Logged as next iteration — not yet shipped.</td></tr>
+        <tr><td><div class="ph-icon" style="aspect-ratio:1;"></div></td><td>Urban lenders wanted full catalog detail before entering an amount; grassroots users barely read it and just wanted to save.</td><td>[to be added]</td></tr>
+        <tr><td><div class="ph-icon" style="aspect-ratio:1;"></div></td><td>Urban lenders consider the catalog name (e.g. "Celengan Ternak Ayam") for its operational implications; grassroots users prefer goal-based names ("Celengan Lebaran").</td><td>[to be added]</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="d-block" style="border-bottom:none;">
+    <div class="tag">Summary / lessons learnt</div>
+    <div class="summary-stack">
+      <div><h4>What I'd carry forward</h4><p>Designing for two personas with opposite mental models taught me to treat "shared vs. segmented flow" as an explicit trade-off, not an assumption.</p></div>
+      <div><h4>Next iteration</h4><p>User segmentation at the app level, and bulk divestment support (multi-asset or open amount).</p></div>
+    </div>
+  </div>
+
+  <footer class="detail-footer">
+    <span style="color:var(--mid); font-size:12px;">Celengan — Amartha, 2024</span>
+    <a href="mailto:ryan@email.com">Get in touch →</a>
+  </footer>
+</div>
+</div>
+
+<script>
+  function fillIcons(){
+    var imgTpl = document.getElementById('icon-image').innerHTML;
+    var metricTpl = document.getElementById('icon-metric').innerHTML;
+    document.querySelectorAll('.ph-icon').forEach(function(el){
+      el.innerHTML = el.dataset.icon === 'metric' ? metricTpl : imgTpl;
+    });
+  }
+  function openDetail(){ document.getElementById('homeView').classList.add('hidden'); document.getElementById('detailView').classList.remove('hidden'); window.scrollTo(0,0); }
+  function openHome(){ document.getElementById('detailView').classList.add('hidden'); document.getElementById('homeView').classList.remove('hidden'); window.scrollTo(0,0); }
+  fillIcons();
+</script>
+</body>
+</html>
