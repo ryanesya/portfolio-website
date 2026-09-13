@@ -177,6 +177,19 @@
   .flow-proto .flow-proto-note p{ margin:0; color:var(--body); font-size:14.5px; line-height:1.6; }
   .flow-proto .flow-proto-note .hint{ display:flex; align-items:center; gap:8px; margin-top:16px; font-size:13.5px; font-weight:600; color:var(--proj); }
   .flow-proto .flow-proto-note .hint svg{ flex-shrink:0; }
+  .flow-proto .flow-proto-note .btn-fullscreen{ margin-top:18px; }
+  .flow-proto .flow-proto-note .btn-fullscreen svg{ stroke:var(--ink); }
+
+  /* fullscreen prototype overlay: a single reusable modal, filled with whichever
+     project's iframe src was clicked — lets people try the full prototype without
+     leaving the case study, and close it just as easily. */
+  .proto-modal{ position:fixed; inset:0; z-index:1000; display:flex; align-items:center; justify-content:center; padding:32px; }
+  .proto-modal.hidden{ display:none; }
+  .proto-modal-backdrop{ position:absolute; inset:0; background:rgba(12,13,16,.78); }
+  .proto-modal-panel{ position:relative; width:min(420px, 90vw); height:min(900px, 90vh); background:#0c0d10; border-radius:24px; overflow:hidden; box-shadow:0 30px 80px rgba(0,0,0,.5); }
+  .proto-modal-panel iframe{ width:100%; height:100%; border:0; display:block; }
+  .proto-modal-close{ position:absolute; top:14px; right:14px; z-index:2; width:38px; height:38px; border-radius:50%; background:rgba(255,255,255,.12); color:#fff; border:0; font-size:20px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s; }
+  .proto-modal-close:hover{ background:rgba(255,255,255,.22); }
 
   /* each metric is its own bordered card — reads as 3 distinct stats, not one fused block */
   .metrics-box{ display:flex; gap:16px; flex-wrap:wrap; margin-top:32px; }
@@ -573,6 +586,10 @@
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
               <span>Click and scroll inside the screen to try it!</span>
             </div>
+            <button class="btn-pill btn-fullscreen" onclick="openProtoModal('https://www.figma.com/embed?embed_host=share&amp;hide-ui=1&amp;url=https%3A%2F%2Fwww.figma.com%2Fproto%2FW0T1qMMemGw4rsgBbiqe5h%2FPortfolio-2025%3Fpage-id%3D293%253A21607%26node-id%3D2061-71825%26viewport%3D-4256%252C-1219%252C0.17%26t%3DJaJ33fAGz9PPe2D4-1%26scaling%3Dmin-zoom%26content-scaling%3Dfixed%26starting-point-node-id%3D2061%253A71825%26hide-ui%3D1')">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+              Open in fullscreen
+            </button>
           </div>
           <div class="proto-phone">
             <div class="screen">
@@ -612,6 +629,10 @@
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
               <span>Click and scroll inside the screen to try it!</span>
             </div>
+            <button class="btn-pill btn-fullscreen" onclick="openProtoModal('https://www.figma.com/embed?embed_host=share&amp;hide-ui=1&amp;url=https%3A%2F%2Fwww.figma.com%2Fproto%2FW0T1qMMemGw4rsgBbiqe5h%2FPortfolio-2025%3Fpage-id%3D293%253A21607%26node-id%3D2061-72865%26viewport%3D-4256%252C-1219%252C0.17%26t%3DJaJ33fAGz9PPe2D4-1%26scaling%3Dmin-zoom%26content-scaling%3Dfixed%26starting-point-node-id%3D2061%253A72865%26hide-ui%3D1')">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+              Open in fullscreen
+            </button>
           </div>
           <div class="proto-phone">
             <div class="screen">
@@ -875,6 +896,10 @@
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
               <span>Click and scroll inside the screen to try it!</span>
             </div>
+            <button class="btn-pill btn-fullscreen" onclick="openProtoModal('https://www.figma.com/embed?embed_host=share&amp;hide-ui=1&amp;url=https%3A%2F%2Fwww.figma.com%2Fproto%2FW0T1qMMemGw4rsgBbiqe5h%2FPortfolio-2025%3Fpage-id%3D293%253A21607%26node-id%3D2156-89040%26viewport%3D-5386%252C-629%252C0.17%26t%3DLUyz2o5TVyHIBX6V-1%26scaling%3Dmin-zoom%26content-scaling%3Dfixed%26starting-point-node-id%3D2156%253A89040%26show-proto-sidebar%3D1')">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+              Open in fullscreen
+            </button>
           </div>
           <div class="proto-phone">
             <div class="screen">
@@ -915,6 +940,10 @@
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
               <span>Click and scroll inside the screen to try it!</span>
             </div>
+            <button class="btn-pill btn-fullscreen" onclick="openProtoModal('https://www.figma.com/embed?embed_host=share&amp;hide-ui=1&amp;url=https%3A%2F%2Fwww.figma.com%2Fproto%2FW0T1qMMemGw4rsgBbiqe5h%2FPortfolio-2025%3Fpage-id%3D293%253A21607%26node-id%3D2156-95684%26viewport%3D-5386%252C-629%252C0.17%26t%3DLUyz2o5TVyHIBX6V-9%26scaling%3Dmin-zoom%26content-scaling%3Dfixed%26starting-point-node-id%3D2156%253A95684%26show-proto-sidebar%3D1')">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+              Open in fullscreen
+            </button>
           </div>
           <div class="proto-phone">
             <div class="screen">
@@ -995,6 +1024,15 @@
       <span>Grassroots Growth Series — Amartha, 2026</span>
     </div>
   </footer>
+</div>
+
+<!-- single reusable fullscreen overlay for "try it yourself" prototypes across every project -->
+<div id="protoModal" class="proto-modal hidden">
+  <div class="proto-modal-backdrop" onclick="closeProtoModal()"></div>
+  <div class="proto-modal-panel">
+    <button class="proto-modal-close" onclick="closeProtoModal()" aria-label="Close fullscreen prototype">&times;</button>
+    <iframe id="protoModalIframe" src="" allowfullscreen></iframe>
+  </div>
 </div>
 
 <script>
@@ -1097,6 +1135,22 @@
         p.classList.toggle('hidden', p.getAttribute('data-utpanel') !== idx);
       });
     });
+  });
+
+  // fullscreen prototype overlay: reuses one modal for every "try it yourself" trigger,
+  // pointing its iframe at whichever prototype URL was clicked
+  function openProtoModal(src){
+    document.getElementById('protoModalIframe').src = src;
+    document.getElementById('protoModal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeProtoModal(){
+    document.getElementById('protoModal').classList.add('hidden');
+    document.getElementById('protoModalIframe').src = '';
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeProtoModal();
   });
 
   fillIcons();
