@@ -34,7 +34,12 @@ Isi bagian bertanda `→`. English, tanpa em-dash (—). Theme color: AMBER.
 ### 4. What is <produk>?
 →
 
-### 5. User research
+### 5. Background
+→ paragraf: apa yang mendorong project ini dibuat, masalah apa yang mau diselesaikan
+
+Main goal → 1 kalimat, goal utama project ini (ditampilkan dalam kotak grey highlight)
+
+### 6. User research
 [[IMG: buyer-discovery_research.png  caption: ""  layout: full]]
 Sub-title: "→"
   → paragraf
@@ -44,7 +49,7 @@ User journey map:
   → kalimat pengantar
   [[IMG: buyer-discovery_journey.png  caption: ""  layout: full]]
 
-### 6. Crafting the solution
+### 7. Crafting the solution
 → bridging paragraph
 Highlighted flow: <flow 1>
   → context
@@ -53,16 +58,16 @@ Highlighted flow: <flow 1>
   Try it yourself → [[PROTOTYPE: https://www.figma.com/proto/...]]
 Highlighted flow: <flow 2>  (struktur sama)
 
-### 7. Usability testing (tabbed)
+### 8. Usability testing (tabbed)
 → intro
 Tab "<label>" (Validated/Refined)
   → insight
   [[IMG: buyer-discovery_ut-1-before.png]] / [[IMG: buyer-discovery_ut-1-after.png]]
 
-### 8. Built with a local component library (opsional)
+### 9. Built with a local component library (opsional)
 [[IMG: buyer-discovery_components.png  caption: "Local component set"  layout: full]]
 →
 
-### 9. Summary
+### 10. Summary
 Lesson learnt   →
 Next iteration  →

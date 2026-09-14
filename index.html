@@ -233,6 +233,12 @@
   .intro-copy li{ font-size:15px; line-height:1.7; color:var(--body); }
   .intro-copy li + li{ margin-top:8px; }
 
+  /* highlighted goal box: neutral grey (not project-tinted), so the main goal reads as a
+     quick-scan callout distinct from the rest of the background copy */
+  .goal-box{ background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:20px 24px; margin-top:20px; }
+  .goal-box .goal-label{ font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--mid); margin-bottom:8px; }
+  .goal-box p{ margin:0; font-size:15px; line-height:1.6; color:var(--ink); font-weight:500; }
+
   /* label under an empty image placeholder, telling what image goes there */
   .ph-label{ font-size:11.5px; color:var(--mid); text-align:center; margin-top:7px; }
   .below-img .ph-label{ text-align:left; }
@@ -523,6 +529,15 @@
     </div>
 
     <div id="problem" class="d-section" style="padding-top:28px;">
+      <h2 class="section-h2">Background</h2>
+      <p>From our research, we found that Amartha's borrowers already have a habit of saving regularly, whether through arisan (rotating savings groups), cooperatives, or cash kept at home. As a platform that already lends to these borrowers, Amartha saw an opportunity to help them save too, and even earn a return in the process, supporting their broader financial wellbeing. Their existing ways of saving also came with real constraints of their own. That gap is what led Amartha to build a dedicated saving product for its borrowers.</p>
+      <div class="goal-box">
+        <div class="goal-label">Main goal</div>
+        <p>Enhance borrowers' existing saving habit with a rewarding, interest-bearing product so they can work toward their financial goals.</p>
+      </div>
+    </div>
+
+    <div class="d-section" style="padding-top:28px;">
       <h2 class="section-h2">User research: Understanding mitra</h2>
       <div class="below-img" style="margin-top:0; margin-bottom:36px;">
         <img src="projects/celengan/images/celengan_research.png" alt="User interview sessions with borrowers">
@@ -826,6 +841,15 @@
     </div>
 
     <div id="problem-ggs" class="d-section" style="padding-top:28px;">
+      <h2 class="section-h2">Background</h2>
+      <p>Amartha previously ran an investment product that channeled funds to a single, selected borrower. That product saw a high rate of repayment failure from borrowers, which pulled down user retention. In response, Amartha developed a new investment concept that spreads funds across a group of borrowers instead, so each investor's assets are more diversified and risk is minimized. This new investment product is now positioned as Amartha's primary investment offering, both for retaining existing users and for acquiring new ones.</p>
+      <div class="goal-box">
+        <div class="goal-label">Main goal</div>
+        <p>Provide a better investment scheme for investors, while generating more business value for the company.</p>
+      </div>
+    </div>
+
+    <div class="d-section" style="padding-top:28px;">
       <h2 class="section-h2">User research: Understanding investors</h2>
       <div class="below-img" style="margin-top:0; margin-bottom:36px;">
         <img src="projects/grassroots/images/grassroots_research.png" alt="Interview and concept testing sessions with investors">

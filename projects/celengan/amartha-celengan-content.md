@@ -32,7 +32,18 @@ Subtitle: "Celengan product metrics, 2024 to Jan 2026"
 Celengan is an investment product for Amartha's rural women borrowers. It adapts the saving
 habits they already have and adds something those habits never gave them: a recurring passive return.
 
-### 5. User research
+### 5. Background
+From our research, we found that Amartha's borrowers already have a habit of saving regularly,
+whether through arisan (rotating savings groups), cooperatives, or cash kept at home. As a platform
+that already lends to these borrowers, Amartha saw an opportunity to help them save too, and even
+earn a return in the process, supporting their broader financial wellbeing. Their existing ways of
+saving also came with real constraints of their own. That gap is what led Amartha to build a
+dedicated saving product for its borrowers.
+
+Main goal → Enhance borrowers' existing saving habit with a rewarding, interest-bearing product so
+they can work toward their financial goals.
+
+### 6. User research
 [[IMG: celengan_research.png  caption: "User interview sessions with borrowers"]]
 
 "Our core users already save, but in ways that earn them nothing"
@@ -50,7 +61,7 @@ User journey map:
 From the research, I mapped out how borrowers save today, a reference point for the rest of the design.
 [[IMG: celengan_journey.png]]   (belum ada, kosong dulu)
 
-### 6. Crafting the solution
+### 7. Crafting the solution
 From these insights, we shaped Celengan around two core flows that mirror how borrowers already
 handle money: putting money in to earn a return (invest), and taking it back out when they need it (divest).
 
@@ -83,7 +94,7 @@ Highlighted flow: divest flow
   Information architecture + user flow → [[IMG: divest-information-architecture.png  caption: "breadboarding"]]
   Try it yourself → [[[PROTOTYPE: https://www.figma.com/proto/...](https://www.figma.com/proto/W0T1qMMemGw4rsgBbiqe5h/Portfolio-2025?page-id=293%3A21607&node-id=2061-72865&viewport=-4256%2C-1219%2C0.17&t=JaJ33fAGz9PPe2D4-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2061%3A72865&show-proto-sidebar=1) (divest)]]
 
-### 7. Usability testing (tabbed)
+### 8. Usability testing (tabbed)
 Intro: I tested the invest and divest flows with users from both segments. Both could complete the
 flows end to end, so the core journeys held up, but three findings still surfaced. Here is what each led to.
 
@@ -105,14 +116,14 @@ Tab "Investment date" (Refined)
   end-of-term date is unmistakable.
   [[IMG: celengan_ut-date-before.png]] / [[IMG: celengan_ut-date-after.png]]
 
-### 8. Built with a local component library
+### 9. Built with a local component library
 [[IMG: celengan_components.png  caption: "Local component set"]]
 - For this project I built and maintained my own components and variants in Figma, evidence that I can
   create and keep a design system consistent at the project level.
 - The library also sped up my own work, since many components were reused across screens, and other
   designers picked them up too, on cross-team projects touching mitra and Celengan.
 
-### 9. Summary
+### 10. Summary
 Lesson learnt
 - Designing an investment product for users with low financial literacy means keeping everything as
   simple as possible, and dropping the financial jargon people usually take for granted.

@@ -36,17 +36,22 @@ Isi bagian bertanda `→`. English, tanpa em-dash (—). Theme color: VIOLET.
 ### 4. Overview / apa yang kamu lakukan
 → 1 paragraf: peran sebagai mentor, format program, siapa yang dibimbing.
 
-### 5. Approach / how you mentor   (H2)
+### 5. Background
+→ paragraf: apa yang mendorong kamu jadi mentor / kenapa program ini dibutuhkan
+
+Main goal → 1 kalimat, goal utama dari mentorship ini (ditampilkan dalam kotak grey highlight)
+
+### 6. Approach / how you mentor   (H2)
 [[IMG: mentoring_approach.png  caption: ""  layout: full]]
 Sub-title: "→"
   → paragraf
 Sub-title: "→"
   → paragraf
 
-### 6. Impact / results   (H2)
+### 7. Impact / results   (H2)
 → hasil konkret: mentee yang berhasil, testimoni, before/after portfolio, dll.
 [[IMG: mentoring_result-1.png  caption: ""  layout: full]]
 
-### 7. Summary
+### 8. Summary
 Lesson learnt   →
 Next iteration  →

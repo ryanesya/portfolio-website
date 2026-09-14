@@ -35,7 +35,18 @@ borrowers at once, so each lender's capital is diversified and the chance of los
 tiers carry different rates, letting lenders match the product to their own risk appetite, while
 every rupiah still funds real businesses on the ground.
 
-### 5. User research
+### 5. Background
+Amartha previously ran an investment product that channeled funds to a single, selected borrower.
+That product saw a high rate of repayment failure from borrowers, which pulled down user retention.
+In response, Amartha developed a new investment concept that spreads funds across a group of
+borrowers instead, so each investor's assets are more diversified and risk is minimized. This new
+investment product is now positioned as Amartha's primary investment offering, both for retaining
+existing users and for acquiring new ones.
+
+Main goal → Provide a better investment scheme for investors, while generating more business value
+for the company.
+
+### 6. User research
 [[IMG: grassroots_research.png  caption: "Interview and concept testing sessions with investors"]]
 
 "Investors look for diversification"
@@ -58,7 +69,7 @@ User journey map:
 From the research, I mapped how investors approach investing today, a reference point for the rest of the design.
 [[IMG: grassroots_journey.png]]   (belum ada, kosong dulu)
 
-### 6. Crafting the solution
+### 7. Crafting the solution
 Because investors actively seek diversification, Grassroots Growth Series fits their behavior well:
 by design, each investor's funds are spread across many borrowers. From these insights, we shaped the
 product around three flows that mirror how investors manage money: investing across many borrowers
@@ -92,16 +103,16 @@ Highlighted flow: monitor & divest flow
   Information architecture + user flow → [[IMG: grassroots_ia-divest.png  caption: "breadboarding"]]
   Try it yourself → [[PROTOTYPE: https://www.figma.com/proto/W0T1qMMemGw4rsgBbiqe5h/Portfolio-2025?page-id=293%3A21607&node-id=2156-95684&viewport=-5386%2C-629%2C0.17&t=LUyz2o5TVyHIBX6V-9&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2156%3A95684&show-proto-sidebar=1 (monitor & divest)]]
 
-### 7. Usability testing (tabbed)
+### 8. Usability testing (tabbed)
 → (belum ditulis, nanti diisi setelah UT selesai)
 
-### 8. Built with a local component library
+### 9. Built with a local component library
 [[IMG: grassroots_components.png  caption: "Local component set"]]
 - For this project I built and maintained my own components and variants in Figma, evidence that I can
   create and keep a design system consistent at the project level.
 - The library also sped up my own work, since many components were reused across screens, and other
   designers picked them up too, on cross-team projects touching Grassroots Growth Series.
 
-### 9. Summary
+### 10. Summary
 Lesson learnt   →
 Next iteration  →
