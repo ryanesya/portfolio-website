@@ -336,6 +336,9 @@
        note on top, phone mockup centered below */
     .flow-proto{ flex-direction:column; align-items:stretch; gap:24px; }
     .flow-proto .proto-phone{ align-self:center; }
+    /* footer contact: icon-only on mobile (still clickable, labelled for a11y) */
+    footer.site-footer .contact-row .text-btn{ padding:8px; gap:0; }
+    footer.site-footer .contact-row .btn-label{ display:none; }
   }
 </style>
 </head>
@@ -493,9 +496,9 @@
     <div class="wrap">
       <span>© 2026 Ryan Sukma Nesya</span>
       <div class="contact-row">
-        <a class="text-btn" href="tel:+6281277885367"><span data-icon="phone"></span>Call</a>
-        <a class="text-btn" href="mailto:ryanesya5@gmail.com"><span data-icon="mail"></span>Mail</a>
-        <a class="text-btn" href="https://www.linkedin.com/in/ryanesya/" target="_blank" rel="noopener"><span data-icon="linkedin"></span>LinkedIn</a>
+        <a class="text-btn" href="tel:+6281277885367" aria-label="Call"><span data-icon="phone"></span><span class="btn-label">Call</span></a>
+        <a class="text-btn" href="mailto:ryanesya5@gmail.com" aria-label="Mail"><span data-icon="mail"></span><span class="btn-label">Mail</span></a>
+        <a class="text-btn" href="https://www.linkedin.com/in/ryanesya/" target="_blank" rel="noopener" aria-label="LinkedIn"><span data-icon="linkedin"></span><span class="btn-label">LinkedIn</span></a>
       </div>
     </div>
   </footer>
