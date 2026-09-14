@@ -332,6 +332,10 @@
     nav.top .links{ gap:16px; }
     .flow-strip{ flex-wrap:wrap; }
     .flow-step{ flex:1 1 40%; }
+    /* on narrow screens the note + phone don't fit side by side, so stack them:
+       note on top, phone mockup centered below */
+    .flow-proto{ flex-direction:column; align-items:stretch; gap:24px; }
+    .flow-proto .proto-phone{ align-self:center; }
   }
 </style>
 </head>
@@ -794,30 +798,6 @@
             <div class="meta-line">2020 – 2025</div>
           </div>
         </a>
-        <a class="proj-card is-soon" onclick="return false" href="#">
-          <img class="thumb" src="projects/field-officer/images/field-officer_cover.png" alt="Field Officer's Daily Monitoring Dashboard cover">
-          <div class="card-body">
-            <h3>Helping Field Officers Monitoring Their Team and Borrower Performance through Dashboard</h3>
-            <div class="company-row"><img src="assets/company-logos/logo-amartha.png" alt="">Amartha</div>
-            <div class="meta-line">2026</div>
-          </div>
-        </a>
-        <a class="proj-card is-soon" onclick="return false" href="#">
-          <img class="thumb" src="projects/buyer-discovery/images/buyer-discovery-content.png" alt="Improving Buyer's Discovery and Learning Experience cover">
-          <div class="card-body">
-            <h3>Improving Buyer's Discovery and Learning Experience</h3>
-            <div class="company-row"><img src="assets/company-logos/logo-tokopedia.png" alt="">Tokopedia</div>
-            <div class="meta-line">2022</div>
-          </div>
-        </a>
-        <a class="proj-card is-soon" onclick="return false" href="#">
-          <img class="thumb" src="projects/moka-payment/images/moka_cover.png" alt="Moka Payment cover">
-          <div class="card-body">
-            <h3>Providing Payment Experience for Cashier and Customer</h3>
-            <div class="company-row"><img src="assets/company-logos/logo-moka.png" alt="">Moka (GoTo Group)</div>
-            <div class="meta-line">2019 – 2020</div>
-          </div>
-        </a>
       </div>
     </div>
   </div>
@@ -1070,30 +1050,6 @@
             <div class="meta-line">2020 – 2025</div>
           </div>
         </a>
-        <a class="proj-card is-soon" onclick="return false" href="#">
-          <img class="thumb" src="projects/field-officer/images/field-officer_cover.png" alt="Field Officer's Daily Monitoring Dashboard cover">
-          <div class="card-body">
-            <h3>Helping Field Officers Monitoring Their Team and Borrower Performance through Dashboard</h3>
-            <div class="company-row"><img src="assets/company-logos/logo-amartha.png" alt="">Amartha</div>
-            <div class="meta-line">2026</div>
-          </div>
-        </a>
-        <a class="proj-card is-soon" onclick="return false" href="#">
-          <img class="thumb" src="projects/buyer-discovery/images/buyer-discovery-content.png" alt="Improving Buyer's Discovery and Learning Experience cover">
-          <div class="card-body">
-            <h3>Improving Buyer's Discovery and Learning Experience</h3>
-            <div class="company-row"><img src="assets/company-logos/logo-tokopedia.png" alt="">Tokopedia</div>
-            <div class="meta-line">2022</div>
-          </div>
-        </a>
-        <a class="proj-card is-soon" onclick="return false" href="#">
-          <img class="thumb" src="projects/moka-payment/images/moka_cover.png" alt="Moka Payment cover">
-          <div class="card-body">
-            <h3>Providing Payment Experience for Cashier and Customer</h3>
-            <div class="company-row"><img src="assets/company-logos/logo-moka.png" alt="">Moka (GoTo Group)</div>
-            <div class="meta-line">2019 – 2020</div>
-          </div>
-        </a>
       </div>
     </div>
   </div>
@@ -1202,7 +1158,7 @@
 
       <p style="margin-bottom:18px;">It also means a lot that this work has been recognized by the institutions and edtech companies that gave me a platform to share: Dibimbing.id, Samsung Solve for Tomorrow 2024, University of Indonesia's Startup Incubate, Kampus Merdeka, GreatEdu, and Shift Academy.</p>
       <div class="below-img" style="margin-top:0; margin-bottom:28px;">
-        <img src="projects/mentoring/images/certificate_mentoring.png" alt="A few of the programs I have been part of">
+        <img src="projects/mentoring/images/certificate_mentoring.png" alt="A few of the programs I have been part of" style="border:1px solid var(--line);">
         <div class="ph-label">A few of the programs I have been part of</div>
       </div>
 
@@ -1229,30 +1185,6 @@
             <h3>Celengan: Investment for Rural Women Entrepreneurs</h3>
             <div class="company-row"><img src="assets/company-logos/logo-amartha.png" alt="">Amartha</div>
             <div class="meta-line">2024</div>
-          </div>
-        </a>
-        <a class="proj-card is-soon" onclick="return false" href="#">
-          <img class="thumb" src="projects/field-officer/images/field-officer_cover.png" alt="Field Officer's Daily Monitoring Dashboard cover">
-          <div class="card-body">
-            <h3>Helping Field Officers Monitoring Their Team and Borrower Performance through Dashboard</h3>
-            <div class="company-row"><img src="assets/company-logos/logo-amartha.png" alt="">Amartha</div>
-            <div class="meta-line">2026</div>
-          </div>
-        </a>
-        <a class="proj-card is-soon" onclick="return false" href="#">
-          <img class="thumb" src="projects/buyer-discovery/images/buyer-discovery-content.png" alt="Improving Buyer's Discovery and Learning Experience cover">
-          <div class="card-body">
-            <h3>Improving Buyer's Discovery and Learning Experience</h3>
-            <div class="company-row"><img src="assets/company-logos/logo-tokopedia.png" alt="">Tokopedia</div>
-            <div class="meta-line">2022</div>
-          </div>
-        </a>
-        <a class="proj-card is-soon" onclick="return false" href="#">
-          <img class="thumb" src="projects/moka-payment/images/moka_cover.png" alt="Moka Payment cover">
-          <div class="card-body">
-            <h3>Providing Payment Experience for Cashier and Customer</h3>
-            <div class="company-row"><img src="assets/company-logos/logo-moka.png" alt="">Moka (GoTo Group)</div>
-            <div class="meta-line">2019 – 2020</div>
           </div>
         </a>
       </div>
@@ -1327,17 +1259,40 @@
     sections.forEach(function(sec){ sectionSpyObserver.observe(sec); });
     if(sections[0]) activate(sections[0].id);
   }
-  function openDetail(id){
-    id = id || 'detailView';
+  // renderView only touches the DOM; navigation (openDetail/openHome) drives the
+  // browser history so the native back gesture and hardware/back button work too.
+  function renderView(id){
+    if(!id || id === 'home'){
+      document.querySelectorAll('.detail-view').forEach(function(v){ v.classList.add('hidden'); });
+      document.getElementById('homeView').classList.remove('hidden'); window.scrollTo(0,0);
+      return;
+    }
+    var el = document.getElementById(id);
+    if(!el){ renderView('home'); return; }
     document.getElementById('homeView').classList.add('hidden');
     document.querySelectorAll('.detail-view').forEach(function(v){ v.classList.add('hidden'); });
-    document.getElementById(id).classList.remove('hidden');
+    el.classList.remove('hidden');
     window.scrollTo(0,0); syncSubNavOffset(); setupSectionSpy();
   }
-  function openHome(){
-    document.querySelectorAll('.detail-view').forEach(function(v){ v.classList.add('hidden'); });
-    document.getElementById('homeView').classList.remove('hidden'); window.scrollTo(0,0);
+  function openDetail(id){
+    id = id || 'detailView';
+    history.pushState({ view:id }, '');
+    renderView(id);
   }
+  function openHome(){
+    // route through history so the "Back to work" button and the native back gesture
+    // land on the same previous page
+    if(history.state && history.state.view && history.state.view !== 'home'){
+      history.back();
+    } else {
+      history.pushState({ view:'home' }, '');
+      renderView('home');
+    }
+  }
+  window.addEventListener('popstate', function(e){
+    renderView(e.state && e.state.view ? e.state.view : 'home');
+  });
+  if(!history.state){ history.replaceState({ view:'home' }, ''); }
   window.addEventListener('resize', syncSubNavOffset);
 
   // Sub-nav tab click: scroll manually instead of relying on the browser's default anchor
