@@ -11,7 +11,7 @@ English, tanpa em-dash (—). Theme color: VIOLET.
 - Cover image   → [[IMG: mentoring_cover.png]]
 - Title         → Mentoring Potential Talent Into Their UX Dream Jobs
 - Company       → Dibimbing.id  (logo: assets/company-logos/logo-dibimbing.png)
-- Year          → 2021 – 2026
+- Year          → 2020 – 2025
 
 ---
 
@@ -19,7 +19,7 @@ English, tanpa em-dash (—). Theme color: VIOLET.
 
 ### 1. Title & meta
 - Title → Mentoring Potential Talent Into Their UX Dream Jobs
-- Role → Mentor · Year → 2021 – 2026 · Company → Dibimbing.id (with logo)
+- Role → Mentor · Year → 2020 – 2025 · Company → Dibimbing.id (with logo)
 
 ### 2. Banner
 [[IMG: mentoring_cover.png]]
@@ -44,13 +44,13 @@ the way I wish someone had helped me when I was starting out.
 It started with teaching online, one session at a time
 [[IMG: first_mentoring.png  caption: "One of my early online mentoring sessions"]]
 
-Then full bootcamp classes, across 25+ cohorts
+Then full bootcamp classes, across 25+ batches
 [[IMG: bootcamp_mentoring.png  caption: "Leading a product design bootcamp class"]]
 
 Guest lecturing at a top university
 [[IMG: UI_mentoring.png  caption: "Teaching at University of Indonesia"]]
 
-And sharing with senior professionals in the corporate world
+And sharing with senior professionals in the corporate space
 [[IMG: corporate_mentoring.png  caption: "A corporate sharing session"]]
 
 ### 6. Grateful to have been trusted to pass on what I know  (H2)

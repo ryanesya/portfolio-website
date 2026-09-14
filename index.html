@@ -35,7 +35,7 @@
      Amartha project so the company reads consistently, project to project. */
   .theme-celengan, .theme-grassroots, .theme-fieldofficer{ --proj:#8b2fc9; --proj-2:#4a1868; --proj-soft:#f3e8fb; }
   .theme-buyer       { --proj:#d9822b; --proj-2:#cf5f1f; --proj-soft:#fbefe1; } /* amber  (Tokopedia) */
-  .theme-mentoring   { --proj:#6d4bd8; --proj-2:#5a34c4; --proj-soft:#efeafb; } /* violet (Dibimbing) */
+  .theme-mentoring   { --proj:#019fa5; --proj-2:#176888; --proj-soft:#e2f5f4; } /* teal (matches mentoring cover) */
   *{ box-sizing:border-box; }
   html{ scroll-behavior:smooth; }
   body{
@@ -114,9 +114,12 @@
   /* projects whose case study isn't written yet: visible but not clickable */
   .proj-card.is-soon{ cursor:default; position:relative; }
   .proj-card.is-soon::after{ content:"Soon"; position:absolute; top:12px; left:12px; background:var(--ink); color:#fff; font-size:11px; padding:4px 10px; border-radius:999px; z-index:1; }
-  .proj-card.is-soon .thumb{ filter:grayscale(1) opacity(.55); }
   .proj-card.is-soon:hover{ transform:none; box-shadow:none; }
   .proj-card.is-soon:hover .card-body{ background:var(--bg); }
+
+  /* separates active projects from not-yet-written ones by grouping under its own
+     heading, rather than styling the cards themselves as "disabled" */
+  .coming-soon-label{ margin-top:44px; }
 
   .contact-row{ display:flex; gap:6px; flex-wrap:wrap; }
 
@@ -439,20 +442,40 @@
             <div class="meta-line">2024</div>
           </div>
         </a>
-        <a class="proj-card is-soon" onclick="return false" href="#">
-          <img class="thumb" src="projects/mentoring/images/mentoring_cover.png" alt="Mentoring Potential Talent to Achieve Their UX Dream Jobs cover">
+        <a class="proj-card" onclick="openDetail('detailView-mentoring'); return false" href="#">
+          <img class="thumb" src="projects/mentoring/images/mentoring_cover.png" alt="Mentoring Potential Talent Into Their UX Dream Jobs cover">
           <div class="card-body">
-            <h3>Mentoring Potential Talent to Achieve Their UX Dream Jobs</h3>
+            <h3>Mentoring Potential Talent Into Their UX Dream Jobs</h3>
             <div class="company-row"><img src="assets/company-logos/logo-dibimbing.png" alt="">Dibimbing.id</div>
-            <div class="meta-line">2021 – 2025</div>
+            <div class="meta-line">2020 – 2025</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="section-label coming-soon-label">Coming soon</div>
+      <div class="grid2">
+        <a class="proj-card is-soon" onclick="return false" href="#">
+          <img class="thumb" src="projects/field-officer/images/field-officer_cover.png" alt="Field Officer's Daily Monitoring Dashboard cover">
+          <div class="card-body">
+            <h3>Helping Field Officers Monitoring Their Team and Borrower Performance through Dashboard</h3>
+            <div class="company-row"><img src="assets/company-logos/logo-amartha.png" alt="">Amartha</div>
+            <div class="meta-line">2026</div>
           </div>
         </a>
         <a class="proj-card is-soon" onclick="return false" href="#">
-          <img class="thumb" src="projects/buyer-discovery/images/homepage-content.webp" alt="Improving Buyer's Discovery and Learning Experience cover">
+          <img class="thumb" src="projects/buyer-discovery/images/buyer-discovery-content.png" alt="Improving Buyer's Discovery and Learning Experience cover">
           <div class="card-body">
             <h3>Improving Buyer's Discovery and Learning Experience</h3>
             <div class="company-row"><img src="assets/company-logos/logo-tokopedia.png" alt="">Tokopedia</div>
             <div class="meta-line">2022</div>
+          </div>
+        </a>
+        <a class="proj-card is-soon" onclick="return false" href="#">
+          <img class="thumb" src="projects/moka-payment/images/moka_cover.png" alt="Moka Payment cover">
+          <div class="card-body">
+            <h3>Providing Payment Experience for Cashier and Customer</h3>
+            <div class="company-row"><img src="assets/company-logos/logo-moka.png" alt="">Moka (GoTo Group)</div>
+            <div class="meta-line">2019 – 2020</div>
           </div>
         </a>
       </div>
@@ -763,20 +786,36 @@
             <div class="meta-line">2026</div>
           </div>
         </a>
-        <a class="proj-card is-soon" onclick="return false" href="#">
-          <img class="thumb" src="projects/mentoring/images/mentoring_cover.png" alt="Mentoring Potential Talent to Achieve Their UX Dream Jobs cover">
+        <a class="proj-card" onclick="openDetail('detailView-mentoring'); return false" href="#">
+          <img class="thumb" src="projects/mentoring/images/mentoring_cover.png" alt="Mentoring Potential Talent Into Their UX Dream Jobs cover">
           <div class="card-body">
-            <h3>Mentoring Potential Talent to Achieve Their UX Dream Jobs</h3>
+            <h3>Mentoring Potential Talent Into Their UX Dream Jobs</h3>
             <div class="company-row"><img src="assets/company-logos/logo-dibimbing.png" alt="">Dibimbing.id</div>
-            <div class="meta-line">2021 – 2025</div>
+            <div class="meta-line">2020 – 2025</div>
           </div>
         </a>
         <a class="proj-card is-soon" onclick="return false" href="#">
-          <img class="thumb" src="projects/buyer-discovery/images/homepage-content.webp" alt="Improving Buyer's Discovery and Learning Experience cover">
+          <img class="thumb" src="projects/field-officer/images/field-officer_cover.png" alt="Field Officer's Daily Monitoring Dashboard cover">
+          <div class="card-body">
+            <h3>Helping Field Officers Monitoring Their Team and Borrower Performance through Dashboard</h3>
+            <div class="company-row"><img src="assets/company-logos/logo-amartha.png" alt="">Amartha</div>
+            <div class="meta-line">2026</div>
+          </div>
+        </a>
+        <a class="proj-card is-soon" onclick="return false" href="#">
+          <img class="thumb" src="projects/buyer-discovery/images/buyer-discovery-content.png" alt="Improving Buyer's Discovery and Learning Experience cover">
           <div class="card-body">
             <h3>Improving Buyer's Discovery and Learning Experience</h3>
             <div class="company-row"><img src="assets/company-logos/logo-tokopedia.png" alt="">Tokopedia</div>
             <div class="meta-line">2022</div>
+          </div>
+        </a>
+        <a class="proj-card is-soon" onclick="return false" href="#">
+          <img class="thumb" src="projects/moka-payment/images/moka_cover.png" alt="Moka Payment cover">
+          <div class="card-body">
+            <h3>Providing Payment Experience for Cashier and Customer</h3>
+            <div class="company-row"><img src="assets/company-logos/logo-moka.png" alt="">Moka (GoTo Group)</div>
+            <div class="meta-line">2019 – 2020</div>
           </div>
         </a>
       </div>
@@ -1023,20 +1062,36 @@
             <div class="meta-line">2024</div>
           </div>
         </a>
-        <a class="proj-card is-soon" onclick="return false" href="#">
-          <img class="thumb" src="projects/mentoring/images/mentoring_cover.png" alt="Mentoring Potential Talent to Achieve Their UX Dream Jobs cover">
+        <a class="proj-card" onclick="openDetail('detailView-mentoring'); return false" href="#">
+          <img class="thumb" src="projects/mentoring/images/mentoring_cover.png" alt="Mentoring Potential Talent Into Their UX Dream Jobs cover">
           <div class="card-body">
-            <h3>Mentoring Potential Talent to Achieve Their UX Dream Jobs</h3>
+            <h3>Mentoring Potential Talent Into Their UX Dream Jobs</h3>
             <div class="company-row"><img src="assets/company-logos/logo-dibimbing.png" alt="">Dibimbing.id</div>
-            <div class="meta-line">2021 – 2025</div>
+            <div class="meta-line">2020 – 2025</div>
           </div>
         </a>
         <a class="proj-card is-soon" onclick="return false" href="#">
-          <img class="thumb" src="projects/buyer-discovery/images/homepage-content.webp" alt="Improving Buyer's Discovery and Learning Experience cover">
+          <img class="thumb" src="projects/field-officer/images/field-officer_cover.png" alt="Field Officer's Daily Monitoring Dashboard cover">
+          <div class="card-body">
+            <h3>Helping Field Officers Monitoring Their Team and Borrower Performance through Dashboard</h3>
+            <div class="company-row"><img src="assets/company-logos/logo-amartha.png" alt="">Amartha</div>
+            <div class="meta-line">2026</div>
+          </div>
+        </a>
+        <a class="proj-card is-soon" onclick="return false" href="#">
+          <img class="thumb" src="projects/buyer-discovery/images/buyer-discovery-content.png" alt="Improving Buyer's Discovery and Learning Experience cover">
           <div class="card-body">
             <h3>Improving Buyer's Discovery and Learning Experience</h3>
             <div class="company-row"><img src="assets/company-logos/logo-tokopedia.png" alt="">Tokopedia</div>
             <div class="meta-line">2022</div>
+          </div>
+        </a>
+        <a class="proj-card is-soon" onclick="return false" href="#">
+          <img class="thumb" src="projects/moka-payment/images/moka_cover.png" alt="Moka Payment cover">
+          <div class="card-body">
+            <h3>Providing Payment Experience for Cashier and Customer</h3>
+            <div class="company-row"><img src="assets/company-logos/logo-moka.png" alt="">Moka (GoTo Group)</div>
+            <div class="meta-line">2019 – 2020</div>
           </div>
         </a>
       </div>
@@ -1046,6 +1101,167 @@
   <footer class="site-footer">
     <div class="wrap">
       <span>Grassroots Growth Series — Amartha, 2026</span>
+    </div>
+  </footer>
+</div>
+
+<div id="detailView-mentoring" class="hidden theme-mentoring detail-view">
+  <nav class="top">
+    <div class="wrap detail-nav">
+      <a class="text-btn back" onclick="openHome(); return false" href="#"><span data-icon="back"></span> Back to work</a>
+    </div>
+  </nav>
+
+  <div class="sub-nav">
+    <div class="wrap">
+      <a href="#overview-mentoring">Overview</a>
+      <a href="#motivation-mentoring">Motivation</a>
+      <a href="#journey-mentoring">Journey</a>
+      <a href="#recognition-mentoring">Recognition</a>
+    </div>
+  </div>
+
+  <div id="overview-mentoring" class="proj-hero">
+    <div class="wrap">
+      <h1 class="d-title">Mentoring Potential Talent Into Their UX Dream Jobs</h1>
+      <div class="d-meta-row">
+        <div class="cell"><span data-icon="role"></span><b>Role</b><span>Mentor</span></div>
+        <div class="cell"><span data-icon="calendar"></span><b>Year</b><span>2020 – 2025</span></div>
+        <div class="cell"><span data-icon="company"></span><b>Company</b><span><img class="meta-logo" src="assets/company-logos/logo-dibimbing.png" alt="">Dibimbing.id</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <div class="d-section" style="border-bottom:none; padding:24px 0 0;">
+      <img class="proj-banner" src="projects/mentoring/images/mentoring_cover.png" alt="Mentoring cover">
+    </div>
+
+    <div class="d-section" style="border-bottom:none; padding:44px 0 48px;">
+      <div class="section-h2 tight">Achievement</div>
+      <div class="metrics-box">
+        <div class="metric"><div class="m-icon" data-icon="transaction"></div><div class="num">100+</div><div class="lbl">Teaching sessions</div></div>
+        <div class="metric"><div class="m-icon" data-icon="calendar"></div><div class="num">200+ hours</div><div class="lbl">Total hours taught</div></div>
+        <div class="metric"><div class="m-icon" data-icon="userplus"></div><div class="num">1,000+</div><div class="lbl">Students reached</div></div>
+      </div>
+    </div>
+
+    <div id="motivation-mentoring" class="d-section" style="padding-top:28px;">
+      <h2 class="section-h2">Why I mentor</h2>
+      <p>When I was a fresh graduate, I struggled too. I had no idea what to do to land my first job. I went to every workshop and sharing session I could find and taught myself product design from scratch, back when structured bootcamps like today's didn't exist yet. I know first-hand how hard it is to break into this field, especially product design. That is what makes me feel called to share what I know, and what I have lived through, with young talent and people looking to switch careers.</p>
+      <div class="goal-box">
+        <div class="goal-label">Main goal</div>
+        <p>Help aspiring designers understand product design and land the roles they are aiming for, the way I wish someone had helped me when I was starting out.</p>
+      </div>
+    </div>
+
+    <div id="journey-mentoring" class="d-section">
+      <h2 class="section-h2">My mentoring journey</h2>
+
+      <div class="subsection">
+        <div class="text"><div class="sentence-title">It started with teaching online, one session at a time.</div></div>
+        <div class="below-img">
+          <img src="projects/mentoring/images/first_mentoring.png" alt="One of my early online mentoring sessions">
+          <div class="ph-label">One of my early online mentoring sessions</div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="text"><div class="sentence-title">Then full bootcamp classes, across 25+ batches.</div></div>
+        <div class="below-img">
+          <img src="projects/mentoring/images/bootcamp_mentoring.png" alt="Leading a product design bootcamp class">
+          <div class="ph-label">Leading a product design bootcamp class</div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="text"><div class="sentence-title">Guest lecturing at a top university.</div></div>
+        <div class="below-img">
+          <img src="projects/mentoring/images/UI_mentoring.png" alt="Teaching at University of Indonesia">
+          <div class="ph-label">Teaching at University of Indonesia</div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="text"><div class="sentence-title">And sharing with senior professionals in the corporate space.</div></div>
+        <div class="below-img">
+          <img src="projects/mentoring/images/corporate_mentoring.png" alt="A corporate sharing session">
+          <div class="ph-label">A corporate sharing session</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="recognition-mentoring" class="d-section">
+      <h2 class="section-h2">Grateful to have been trusted to pass on what I know</h2>
+      <p style="margin-bottom:18px;">I hope the knowledge and experience I have shared over the years becomes something genuinely useful to many people, and a strong foundation for the careers they are building ahead.</p>
+      <div class="below-img" style="margin-top:0; margin-bottom:28px;">
+        <img src="projects/mentoring/images/testimoni_mentoring.png" alt="Words from the people I have mentored">
+        <div class="ph-label">Words from the people I have mentored</div>
+      </div>
+
+      <p style="margin-bottom:18px;">It also means a lot that this work has been recognized by the institutions and edtech companies that gave me a platform to share: Dibimbing.id, Samsung Solve for Tomorrow 2024, University of Indonesia's Startup Incubate, Kampus Merdeka, GreatEdu, and Shift Academy.</p>
+      <div class="below-img" style="margin-top:0; margin-bottom:28px;">
+        <img src="projects/mentoring/images/certificate_mentoring.png" alt="A few of the programs I have been part of">
+        <div class="ph-label">A few of the programs I have been part of</div>
+      </div>
+
+      <p>I hope I get more chances to share about product design in the future, especially now that the field has grown so much faster than when I started.</p>
+    </div>
+
+  </div>
+
+  <div class="other-projects">
+    <div class="wrap">
+      <div class="section-h2">Other projects</div>
+      <div class="grid2">
+        <a class="proj-card" onclick="openDetail('detailView-ggs'); return false" href="#">
+          <img class="thumb" src="projects/grassroots/images/grassroots_cover.png" alt="Grassroots Growth Series cover">
+          <div class="card-body">
+            <h3>Grassroots Growth Series: Impact Investing for Urban Lenders</h3>
+            <div class="company-row"><img src="assets/company-logos/logo-amartha.png" alt="">Amartha</div>
+            <div class="meta-line">2026</div>
+          </div>
+        </a>
+        <a class="proj-card" onclick="openDetail('detailView'); return false" href="#">
+          <img class="thumb" src="projects/celengan/images/celengan_cover.png" alt="Celengan cover">
+          <div class="card-body">
+            <h3>Celengan: Investment for Rural Women Entrepreneurs</h3>
+            <div class="company-row"><img src="assets/company-logos/logo-amartha.png" alt="">Amartha</div>
+            <div class="meta-line">2024</div>
+          </div>
+        </a>
+        <a class="proj-card is-soon" onclick="return false" href="#">
+          <img class="thumb" src="projects/field-officer/images/field-officer_cover.png" alt="Field Officer's Daily Monitoring Dashboard cover">
+          <div class="card-body">
+            <h3>Helping Field Officers Monitoring Their Team and Borrower Performance through Dashboard</h3>
+            <div class="company-row"><img src="assets/company-logos/logo-amartha.png" alt="">Amartha</div>
+            <div class="meta-line">2026</div>
+          </div>
+        </a>
+        <a class="proj-card is-soon" onclick="return false" href="#">
+          <img class="thumb" src="projects/buyer-discovery/images/buyer-discovery-content.png" alt="Improving Buyer's Discovery and Learning Experience cover">
+          <div class="card-body">
+            <h3>Improving Buyer's Discovery and Learning Experience</h3>
+            <div class="company-row"><img src="assets/company-logos/logo-tokopedia.png" alt="">Tokopedia</div>
+            <div class="meta-line">2022</div>
+          </div>
+        </a>
+        <a class="proj-card is-soon" onclick="return false" href="#">
+          <img class="thumb" src="projects/moka-payment/images/moka_cover.png" alt="Moka Payment cover">
+          <div class="card-body">
+            <h3>Providing Payment Experience for Cashier and Customer</h3>
+            <div class="company-row"><img src="assets/company-logos/logo-moka.png" alt="">Moka (GoTo Group)</div>
+            <div class="meta-line">2019 – 2020</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>Mentoring Potential Talent Into Their UX Dream Jobs — Dibimbing.id, 2020 – 2025</span>
     </div>
   </footer>
 </div>
