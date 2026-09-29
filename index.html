@@ -201,6 +201,7 @@
   .metric .m-icon svg{ width:16px; height:16px; stroke:var(--ink); }
   .metric .num{ font-size:21px; font-weight:600; letter-spacing:-.01em; line-height:1.2; margin-bottom:4px; }
   .metric .lbl{ font-size:13px; color:var(--ink); }
+  .metrics-note{ font-size:12.5px; font-style:italic; color:var(--faint); margin-top:14px; }
 
   .gallery-hero{ width:100%; aspect-ratio:16/9; border-radius:var(--radius); margin-bottom:18px; position:relative; overflow:hidden; }
   .gallery-sub-label{ font-size:12px; color:var(--mid); text-transform:uppercase; letter-spacing:.06em; margin:22px 0 12px; }
@@ -548,6 +549,7 @@
         <div class="metric"><div class="m-icon" data-icon="transaction"></div><div class="num">Tens of thousands</div><div class="lbl">Monthly transactions</div></div>
         <div class="metric"><div class="m-icon" data-icon="userplus"></div><div class="num">Tens of thousands</div><div class="lbl">New users each month</div></div>
       </div>
+      <div class="metrics-note">Figures are rounded to respect Amartha's confidentiality.</div>
     </div>
 
     <div class="d-section" style="border-bottom:none; padding:0 0 28px;">
@@ -851,6 +853,7 @@
         <div class="metric"><div class="m-icon" data-icon="userplus"></div><div class="num">Tens of thousands</div><div class="lbl">New users each month</div></div>
         <div class="metric"><div class="m-icon" data-icon="transaction"></div><div class="num">Hundreds of thousands</div><div class="lbl">Registered investors</div></div>
       </div>
+      <div class="metrics-note">Figures are rounded to respect Amartha's confidentiality.</div>
     </div>
 
     <div class="d-section" style="border-bottom:none; padding:0 0 28px;">
@@ -1281,14 +1284,10 @@
     renderView(id);
   }
   function openHome(){
-    // route through history so the "Back to work" button and the native back gesture
-    // land on the same previous page
-    if(history.state && history.state.view && history.state.view !== 'home'){
-      history.back();
-    } else {
-      history.pushState({ view:'home' }, '');
-      renderView('home');
-    }
+    // the "Back to work" button always returns to the homepage; the native back
+    // gesture/browser button is handled separately via popstate below
+    history.pushState({ view:'home' }, '');
+    renderView('home');
   }
   window.addEventListener('popstate', function(e){
     renderView(e.state && e.state.view ? e.state.view : 'home');
