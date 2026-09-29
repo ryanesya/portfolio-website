@@ -24,9 +24,9 @@ Acuan struktur + gaya: `projects/celengan/amartha-celengan-content.md`.
 
 ### 3. Achievement
 Subtitle: "Grassroots Growth Series product metrics, Jan to Sep 2026"
-- Rp2B    → Disbursed to borrowers
-- 18K+    → Monthly new user
-- 320K    → Registered investor
+- Tens of thousands      → New users each month
+- Hundreds of thousands  → Registered investors
+(angka finansial disbursed sengaja tidak ditampilkan; figure absolut dibulatin ke bucket demi menjaga info confidential)
 
 ### 4. What is Grassroots Growth Series?
 Grassroots Growth Series is an impact investing product for Amartha's urban lenders. Their money is

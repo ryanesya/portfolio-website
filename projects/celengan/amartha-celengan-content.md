@@ -24,9 +24,9 @@ Ini contoh acuan buat project lain (struktur + gaya nulis). Sinkron dengan yang 
 
 ### 3. Achievement
 Subtitle: "Celengan product metrics, 2024 to Jan 2026"
-- 67K       → Monthly transaction unit
-- Rp63.85B  → Gross merchandise value
-- 15K+      → Monthly new user
+- Tens of thousands  → Monthly transactions
+- Tens of thousands  → New users each month
+(angka finansial GMV sengaja tidak ditampilkan; figure absolut dibulatin ke bucket demi menjaga info confidential)
 
 ### 4. What is Celengan?
 Celengan is an investment product for Amartha's rural women borrowers. It adapts the saving
