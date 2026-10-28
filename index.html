@@ -1278,21 +1278,39 @@
     el.classList.remove('hidden');
     window.scrollTo(0,0); syncSubNavOffset(); setupSectionSpy();
   }
+  // each project gets a unique, shareable URL hash (e.g. .../#celengan). The hash is the
+  // source of truth for deep links; pushState keeps native back/forward working too.
+  var SLUG_BY_VIEW = { 'detailView':'celengan', 'detailView-ggs':'ggs', 'detailView-mentoring':'mentoring' };
+  var VIEW_BY_SLUG = { 'celengan':'detailView', 'ggs':'detailView-ggs', 'mentoring':'detailView-mentoring' };
+  function viewFromHash(){
+    return VIEW_BY_SLUG[(location.hash || '').replace(/^#/, '')] || 'home';
+  }
+  function setUrl(view){
+    var slug = SLUG_BY_VIEW[view];
+    var url = slug ? '#' + slug : location.pathname + location.search;
+    // pushState with a URL throws on opaque/null origins (e.g. a data: sandbox); fall back
+    // to a plain hash assignment there so navigation never hard-fails
+    try { history.pushState({ view:view }, '', url); }
+    catch(e){ try { location.hash = slug || ''; } catch(_){} }
+  }
   function openDetail(id){
     id = id || 'detailView';
-    history.pushState({ view:id }, '');
+    setUrl(id);
     renderView(id);
   }
   function openHome(){
-    // the "Back to work" button always returns to the homepage; the native back
-    // gesture/browser button is handled separately via popstate below
-    history.pushState({ view:'home' }, '');
+    // the "Back to work" button always returns to the homepage (clears the hash);
+    // the native back gesture/browser button is handled separately via popstate below
+    setUrl('home');
     renderView('home');
   }
   window.addEventListener('popstate', function(e){
-    renderView(e.state && e.state.view ? e.state.view : 'home');
+    renderView(e.state && e.state.view ? e.state.view : viewFromHash());
   });
-  if(!history.state){ history.replaceState({ view:'home' }, ''); }
+  window.addEventListener('hashchange', function(){ renderView(viewFromHash()); });
+  // honor a deep-linked hash on first load (e.g. someone opens .../#celengan directly)
+  renderView(viewFromHash());
+  try { if(!history.state){ history.replaceState({ view: viewFromHash() }, ''); } } catch(e){}
   window.addEventListener('resize', syncSubNavOffset);
 
   // Sub-nav tab click: scroll manually instead of relying on the browser's default anchor
